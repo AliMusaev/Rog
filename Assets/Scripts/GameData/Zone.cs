@@ -4,37 +4,31 @@ using UnityEngine;
 
 public class Zone
 {
-    public int Id { get; private set; }
+    public int ZoneLvl { get; private set; }
+    public int ValueType { get; private set; }
     public int Value { get; private set; }
     public int StepCounter { get; private set; }
-    public Zone(int id, int value, int steps)
+    private ZoneDataHandler zoneDataHandler;
+    public Zone(int zoneLvl)
     {
-        this.Id = id;
-        this.Value = value;
-        this.StepCounter = steps;
+        this.ZoneLvl = zoneLvl;
+        zoneDataHandler = new ZoneDataHandler();
+        UpdateZoneValues(zoneDataHandler.GetNewZone());
+        HUDDataHandler.UpdataZoneInf(this);
         PlayerMainController.PlayerMoves += CounterCheck;
-    }
-    public Zone(Zone newZone)
-    {
-        this.Id = newZone.Id;
-        this.Value = newZone.Value;
-        this.StepCounter = newZone.StepCounter;
     }
     private void CounterCheck()
     {
-        if (StepCounter == 0)
+        StepCounter--;
+        if (StepCounter <= 0)
         {
-            UpdateZone( new Zone(ZoneDataHandler.GetNewZone()));
-        }
-        else
-        {
-            StepCounter--;
+            UpdateZoneValues(zoneDataHandler.GetNewZone());
         }
     }
-    private void UpdateZone (Zone newZone)
+    private void UpdateZoneValues(int [] newValues)
     {
-        this.Id = newZone.Id;
-        this.Value = newZone.Value;
-        this.StepCounter = newZone.StepCounter;
+        this.ValueType = newValues[0];
+        this.Value = newValues[1];
+        this.StepCounter = newValues[2];
     }
 }

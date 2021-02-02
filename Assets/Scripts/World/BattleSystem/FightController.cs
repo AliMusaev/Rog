@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class FightController : MonoBehaviour
+public class FightController
 {
     private double[] _playerStats;
     private double[] _enemyParams;

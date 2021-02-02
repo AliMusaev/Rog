@@ -22,7 +22,7 @@ public class PrepController
     }
     private void SetPlayerBonus()
     {
-        switch (zone.Id)
+        switch (zone.ValueType)
         {
             case 0:
                 return;

@@ -33,7 +33,7 @@ public class PlayerMovement : MonoBehaviour
             {
                 Ray destnationRay = Camera.main.ScreenPointToRay(Input.mousePosition);
                 RaycastHit hitInfo;
-                if (Physics.Raycast(destnationRay, out hitInfo, 100, WhatCanBeClick))
+                if (Physics.Raycast(destnationRay, out hitInfo, 500, WhatCanBeClick))
                 {
                     navigationMesh.SetDestination(hitInfo.point);
                 }

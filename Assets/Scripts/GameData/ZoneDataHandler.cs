@@ -4,62 +4,49 @@ using UnityEngine;
 
 public class ZoneDataHandler
 {
-    private static readonly ZoneDataHandler instance = new ZoneDataHandler();
-    private static List<ZoneData> zoneDatas;
-    private static readonly int repeatMax = 5;
-    public static Zone GetNewZone()
+    private readonly int maxMulti = 5;
+    private readonly int maxRepeat = 5;
+    // without mod - 85; EXP - 5; Gold - 5; Loot Drop - 5;
+    private readonly int[] modsProcChances = new int[4] {5, 50, 80, 100 };
+    static System.Random rand = new System.Random();
+    public  int[] GetNewZone()
     {
-        Debug.Log("dsa");
-        var i = CalculateZoneId();
-        return new Zone(zoneDatas[i].ValueId, zoneDatas[i].valueVariants[CalculateAttributeValue(i)], CalculateRepeatValue());
+        return new int[3] { CalculateModType(), CalculateAttributeValue(), CalculateRepeatValue() };
     }
-    private ZoneDataHandler()
+   
+    // 0 - without mod; 1 - EXP; 2 - Gold; 3 - Loot Drop;
+    private  int CalculateModType()
     {
-        zoneDatas = new DataLoader().LoadZoneInfoFromFile();
-    }
-
-    private static int CalculateZoneId()
-    {
-        System.Random rand = new System.Random();
-        double[] chanceValues = new double[zoneDatas.Count];
-        for (int i = 0; i < chanceValues.Length; i++)
-        {
-            if (i > 0)
-                chanceValues[i] = zoneDatas[i].ProcChance + zoneDatas[i-1].ProcChance;
-            else
-                chanceValues[i] = zoneDatas[i].ProcChance;
-        }
+        
         var a = rand.NextDouble() * 100;
-        for (int i = 0; i < chanceValues.Length; i++)
+        for (int i = 0; i < modsProcChances.Length; i++)
         {
-            if (i > 0 && i + 1 != chanceValues.Length)
+            if (i > 0 && i + 1 != modsProcChances.Length)
             {
-                if (a > chanceValues[i - 1] && a < chanceValues[i + 1])
+                if (a > modsProcChances[i - 1] && a < modsProcChances[i + 1])
                     return i;
             }
             else if(i == 0)
             {
-                if (a < chanceValues[i + 1])
+                if (a < modsProcChances[i + 1])
                     return i;
             }
-            else if(i + 1 == chanceValues.Length)
+            else if(i + 1 == modsProcChances.Length)
             {
-                if (a > chanceValues[i - 1])
+                if (a > modsProcChances[i - 1])
                     return i;
             }
         }
         Debug.Log("ZoneDataHandler CalculateZoneId Error");
         return -1;
     }
-    private static int CalculateAttributeValue(int i)
+    private int CalculateAttributeValue()
     {
-        System.Random rand = new System.Random();
-        return rand.Next(i, zoneDatas[i].valueVariants.Count);
+        return rand.Next(1, maxMulti);
     }
-    private static int CalculateRepeatValue()
+    private int CalculateRepeatValue()
     {
-        System.Random rand = new System.Random();
-        return rand.Next(1, repeatMax);
+        return rand.Next(1, maxRepeat);
     }
 
 }

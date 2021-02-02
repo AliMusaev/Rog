@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 public class BattleController
@@ -8,8 +9,9 @@ public class BattleController
     PrepController prep;
     public BattleController(int _zonelvl, Zone zone)
     {
-        _playerStats = PlayerMainController.PlayerStats;
-        _enemyParams = new Enemy(_zonelvl).EnemyParams;
+        
+        _playerStats = (double[])PlayerMainController.PlayerStats.Clone();
+        _enemyParams = (double[])(new Enemy(_zonelvl).EnemyParams).Clone();
         prep = new PrepController(_playerStats, _enemyParams, zone);
         FightController fight = new FightController(_playerStats, _enemyParams, zone);
         if (fight.Fight())

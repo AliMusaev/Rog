@@ -26,7 +26,7 @@ public class RewardController
     }
     private void CalcReward()
     {
-        exp = (int)(baseExp * Math.Pow(1.1, _zoneLvl) * _rewardMultipliers[0]);
+        exp = (int)(baseExp * 1.1 * _zoneLvl * _rewardMultipliers[0]);
         gold = (int)(baseGold * Math.Pow(1.01, _zoneLvl) * _rewardMultipliers[1]); 
         lootChance = (baseLootChance * _rewardMultipliers[2]);
     }

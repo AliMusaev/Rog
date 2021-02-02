@@ -2,11 +2,11 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class LoadedGameData
+public class ItemDatahandler
 {
-    private static readonly LoadedGameData instance = new LoadedGameData();
+    private static readonly ItemDatahandler instance = new ItemDatahandler();
     public static List<ItemData> ItemsList { get; private set; }
-    private LoadedGameData()
+    private ItemDatahandler()
     {
         ItemsList = new DataLoader().LoadItemsFromFile();
     }

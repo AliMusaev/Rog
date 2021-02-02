@@ -6,26 +6,35 @@ public class ZoneController : MonoBehaviour
 {
     [Header("Zone Parameters")]
     [SerializeField] private int zoneLevel;
+    public Zone zone;
+    private readonly object obj = new object();
     private bool choosenBox;
-    private Zone zone;
-    // Start is called before the first frame update
+    public int a;
+    public int b;
+
     void Start()
     {
-        zone = ZoneDataHandler.GetNewZone();
-    }
+        zone = new Zone(zoneLevel);
+        a = zone.StepCounter;
+        b = zone.ValueType;
 
-    // Update is called once per frame
+    }
     void Update()
     {
         if (EnemyTrigger.IsReady && choosenBox)
         {
-            BattleController bController =  new BattleController(zoneLevel, zone);          
+            
+            a = zone.StepCounter;
+            b = zone.ValueType;
+            BattleController bController =  new BattleController(zoneLevel, zone);  
             EnemyTrigger.IsReady = false;
+            HUDDataHandler.UpdataZoneInf(zone);
         }
     }
     private void OnTriggerEnter(Collider other)
     {
         choosenBox = true;
+        HUDDataHandler.UpdataZoneInf( zone);
     }
     private void OnTriggerExit(Collider other)
     {

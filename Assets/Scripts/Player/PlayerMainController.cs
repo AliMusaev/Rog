@@ -27,13 +27,15 @@ public static class PlayerMainController
     {
         for (int i = 0; i < _mainStats.Length; i++)
         {
-            _mainStats[i] = values[i];
+
+                _mainStats[i] = values[i];
+            
         }
         UpdatePlayerStats();
     }
     public static void UpdatePlayerStats()
     {
-        int[] mainStats = new int[5];
+        int[] mainStats = _mainStats;
         // Summary of main player stats and  main items stats
         for (int i = 0; i < mainStats.Length; i++)
         {
