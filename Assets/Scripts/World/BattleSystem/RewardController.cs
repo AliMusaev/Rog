@@ -2,41 +2,55 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
-public class RewardController
+public class RewardController : MonoBehaviour
 {
-    private readonly int baseExp = 50;
-    private readonly int baseGold = 5;
-    private readonly double baseLootChance = 0.01f;
-    private  int exp = 50;
-    private  int gold = 5;
-    private  double lootChance = 0.01f;
-    private double[] _rewardMultipliers;
-    private int _zoneLvl;
-    public RewardController(int _zoneLvl, double[] _rewardMultipliers)
+    [SerializeField] Text ResultAttention;
+    [SerializeField] Text EarnedExp;
+    [SerializeField] Text EarnedGold;
+    [SerializeField] Text AddedLvls;
+    [SerializeField] Text AddedStatPoints;
+    [SerializeField] Text ItemField;
+    private int playerLvlBeforeReward;
+    private int playerLvlAfterReward;
+    private int playerFreePointsBeforeReward;
+    private int playerFreePointsAfterReward;
+    private RewardMath rMath;
+
+    public void StartRewarding()
     {
-        this._rewardMultipliers = _rewardMultipliers;
-        this._zoneLvl = _zoneLvl;
-    }
-    public void GetReward()
-    {
-        CalcReward();
-        CalcLootDrop();
-        PlayerExpController.AddExpForBattle(exp);
-    }
-    private void CalcReward()
-    {
-        exp = (int)(baseExp * 1.1 * _zoneLvl * _rewardMultipliers[0]);
-        gold = (int)(baseGold * Math.Pow(1.01, _zoneLvl) * _rewardMultipliers[1]); 
-        lootChance = (baseLootChance * _rewardMultipliers[2]);
-    }
-    private void CalcLootDrop()
-    {
-        System.Random rand = new System.Random();
-        if (rand.NextDouble() < lootChance)
+        if (BattleDataStorage.LastBattleResult)
         {
-            PlayerItemsController.AddNewItemInInventory(_zoneLvl);
+            LoadInfoBeforeReward();
+            rMath = new RewardMath();
+            rMath.CalculateReward();
+            LoadInfoAfterReward();
+            PlayerMainController.UpdateSteps(1);
+            ResultAttention.text = "YOU WIN";
+            EarnedExp.text = rMath.CalculatedExp.ToString();
+            EarnedGold.text = rMath.CalculatedGold.ToString();
+            AddedLvls.text = (playerLvlAfterReward - playerLvlBeforeReward).ToString();
+            AddedStatPoints.text = (playerFreePointsAfterReward - playerFreePointsBeforeReward).ToString();
+            if (rMath.item != null)
+            {
+                ItemField.text = $"EARNED: {rMath.item.ItemName}";
+            }
         }
+        else
+        {
+            PlayerMainController.UpdateSteps(5);
+        }
+    }
+    private void LoadInfoBeforeReward()
+    {
+        playerLvlBeforeReward = PlayerExpController.ExpParams[PlayerExpController.Exp.Level];
+        playerFreePointsBeforeReward = PlayerExpController.ExpParams[PlayerExpController.Exp.FreePoints];
+    }
+    private void LoadInfoAfterReward()
+    {
+        playerLvlAfterReward = PlayerExpController.ExpParams[PlayerExpController.Exp.Level];
+        playerFreePointsAfterReward = PlayerExpController.ExpParams[PlayerExpController.Exp.FreePoints];
     }
 }   
 

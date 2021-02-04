@@ -1,4 +1,0 @@
-Id	Name	ProcChance	Value1	Value2	Value3	Value4	|
-0	ExpMult	80	2	3	4	5	|
-1	GoldMult	10	2	3	4	5	|
-2	LootMult	10	2	3	4	5	|

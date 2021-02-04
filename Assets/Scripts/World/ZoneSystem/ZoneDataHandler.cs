@@ -8,7 +8,7 @@ public class ZoneDataHandler
     private readonly int maxRepeat = 5;
     // without mod - 85; EXP - 5; Gold - 5; Loot Drop - 5;
     private readonly int[] modsProcChances = new int[4] {5, 50, 80, 100 };
-    static System.Random rand = new System.Random();
+    private static System.Random rand = new System.Random();
     public  int[] GetNewZone()
     {
         return new int[3] { CalculateModType(), CalculateAttributeValue(), CalculateRepeatValue() };

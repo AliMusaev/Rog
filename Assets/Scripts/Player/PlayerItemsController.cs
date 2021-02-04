@@ -50,9 +50,9 @@ public static class PlayerItemsController
         CalculateItemsAddStats();
         PlayerMainController.UpdatePlayerStats();
     }
-    public static void AddNewItemInInventory(int zoneLvl)
+    public static void AddNewItemInInventory(ItemData newItem)
     {
-
+        _inventory.Add(newItem);
     }
     // Returns item type binded to item field
     public static int GetItemTypeByCellNumber(int chosenItemFieldNumber)

@@ -2,31 +2,48 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-public class BattleController
+using UnityEngine.Events;
+using UnityEngine.UI;
+
+public class BattleController : MonoBehaviour
 {
-    private double[] _playerStats;
-    private double[] _enemyParams;
-    PrepController prep;
-    public BattleController(int _zonelvl, Zone zone)
+    public UnityEvent BattleCalcIsComplete;
+    public UnityEvent CallRewardControll;
+    [Header("Battle Window")]
+    [SerializeField] GameObject BattleWindow;
+    [SerializeField] Button ExitButton;
+    [Header("Reward Menu")]
+    [SerializeField] GameObject RewardMenu;
+
+
+    private BattleMath bMath;
+    private void Start()
     {
-        
-        _playerStats = (double[])PlayerMainController.PlayerStats.Clone();
-        _enemyParams = (double[])(new Enemy(_zonelvl).EnemyParams).Clone();
-        prep = new PrepController(_playerStats, _enemyParams, zone);
-        FightController fight = new FightController(_playerStats, _enemyParams, zone);
-        if (fight.Fight())
+        EnemyTrigger.CallBattle += HandleBattle;
+        BattleWindow.SetActive(false);
+    }
+    private void Update()
+    {
+        if (BattleDataStorage.BattleRepresentIsFinished)
         {
-            RewardController reward = new RewardController(_zonelvl, prep._rewardMultipliers);
-            reward.GetReward();
-            PlayerMainController.UpdateSteps(1);
-            Debug.Log("Win");
-        }
-        else
-        {
-            PlayerMainController.UpdateSteps(5);
-            Debug.Log("Lose");
+            BattleDataStorage.BattleRepresentIsFinished = false;
+            RewardMenu.SetActive(true);
+            CallRewardControll.Invoke();
         }
     }
+    public void HandleBattle()
+    {
+        BattleWindow.SetActive(true);
+        BattleDataStorage.LoadActualDataBeforeBattle();
+        bMath = new BattleMath();
+        if (bMath.Fight())
+            BattleDataStorage.LastBattleResult = true;
+        else
+            BattleDataStorage.LastBattleResult = false;
+        BattleCalcIsComplete.Invoke();
+    }
+
+
    
    
 }

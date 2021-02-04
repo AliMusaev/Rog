@@ -5,21 +5,22 @@ using UnityEngine;
 
 public class EnemyTrigger : MonoBehaviour
 {
+    public static event Action CallBattle;
     public static event Action<float> UpdateTraveledDistance;
-    public PlayerMovement obj;
+    public PlayerMovement Player;
     public static float DistanceToTrigger = 100;
     private Rigidbody playersBody;
     private float oldX;
     private float oldZ;
-    private static float distanceTraveled;
+    public static float DistanceTraveled { get; private set; }
     public static bool IsReady;
     private System.Random rand;
-    public static float DistanceTraveled { get => distanceTraveled;}
+    
 
     // Start is called before the first frame update
     void Start()
     {
-        playersBody = obj.GetComponent<Rigidbody>();
+        playersBody = Player.GetComponent<Rigidbody>();
         oldX = playersBody.worldCenterOfMass.x;
         oldZ = playersBody.worldCenterOfMass.z;
         rand = new System.Random();
@@ -36,21 +37,22 @@ public class EnemyTrigger : MonoBehaviour
     {
         if (playersBody.worldCenterOfMass.x != oldX && playersBody.worldCenterOfMass.z != oldZ)
         {
-            distanceTraveled += Math.Abs(playersBody.worldCenterOfMass.x - oldX) + Math.Abs(playersBody.worldCenterOfMass.z - oldZ);
+            DistanceTraveled += Math.Abs(playersBody.worldCenterOfMass.x - oldX) + Math.Abs(playersBody.worldCenterOfMass.z - oldZ);
             if (UpdateTraveledDistance != null)
             {
-                UpdateTraveledDistance.Invoke(distanceTraveled);
+                UpdateTraveledDistance.Invoke(DistanceTraveled);
             }
             
             oldX = playersBody.worldCenterOfMass.x;
             oldZ = playersBody.worldCenterOfMass.z;
-            var dist = Math.Round(distanceTraveled);
+            var dist = Math.Round(DistanceTraveled);
             if (dist > 60)
             {
                 var temp = rand.NextDouble() * DistanceToTrigger * 50;
                 if ((temp) < dist || dist >= DistanceToTrigger)
                 {
-                    distanceTraveled = 0;
+                    DistanceTraveled = 0;
+                    CallBattle.Invoke();
                     return true;
                 }
                 else

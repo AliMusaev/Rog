@@ -5,6 +5,7 @@ using UnityEngine;
 
 public static class PlayerMainController
 {
+    public static Zone ActualZone { get; set; }
     public static event Action PlayerMoves;
     public static event Action PlayerStatsUpdated;
     public static int[] MainStats { get => _mainStats; }

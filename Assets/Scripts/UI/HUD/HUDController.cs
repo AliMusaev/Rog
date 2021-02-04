@@ -39,7 +39,6 @@ public class HUDController : MonoBehaviour
         ExpSlider.maxValue = reqExp;
         ExpSlider.value = 0;
         RequiredExp.text = reqExp.ToString();
-        //PlyerSteps();
 
     }
     private void UpdateEnemyTrigger(float distTraveled)
