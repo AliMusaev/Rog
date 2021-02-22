@@ -20,7 +20,7 @@ public class HudView : MonoBehaviour
 
     private void Start()
     {
-        Hud.View = this;
+        HudHandler.View = this;
     }
     public void RepresentExpData(ExpData input)
     {
@@ -43,11 +43,6 @@ public class HudView : MonoBehaviour
         this.zoneLevel.text = input.Level.ToString();
         zoneInfoBuilder(input);
     }
-
-
-
-
-
 
     private void zoneInfoBuilder(ZoneData input)
     {

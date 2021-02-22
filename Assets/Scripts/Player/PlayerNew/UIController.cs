@@ -7,14 +7,14 @@ public class UIController
 {
 
     private StatsMenuHandler statsMenu;
-    private Hud hud;
+    private HudHandler hud;
     // Send new values into model
     public static event Action<MainStatsData> SendingNewPlayerStats;
     public static event Action RequestingPlayerStats;
 
     public UIController()
     {
-        hud = new Hud();
+        hud = new HudHandler();
         statsMenu = new StatsMenuHandler();
         StatsMenuHandler.SavingChanges += OnSavingChanges;
         StatsMenuHandler.ResetingValues += OnRequestingPlayerStats;

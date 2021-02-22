@@ -9,8 +9,8 @@ public class HudInitializer : MonoBehaviour
     [SerializeField] private HudController controller;
     void Start()
     {
-        Hud.View = this.view;
-        Hud.Controller = this.controller;
+        HudHandler.View = this.view;
+        HudHandler.Controller = this.controller;
         hud.SetActive(false);
     }
 }

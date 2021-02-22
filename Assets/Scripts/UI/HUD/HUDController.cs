@@ -11,7 +11,8 @@ public class HudController : MonoBehaviour
 
     private void Start()
     {
-        Hud.Controller = this;
+        //
+        HudHandler.Controller = this;
     }
 }
    

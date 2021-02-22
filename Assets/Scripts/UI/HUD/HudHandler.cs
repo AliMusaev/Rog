@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Hud 
+public class HudHandler 
 {
     public static HudController Controller;
     public static HudView View;
@@ -10,9 +10,10 @@ public class Hud
     private ExpData expData;
     private StepsData playerSteps;
     private ZoneData zoneData;
-    public Hud()
+    public HudHandler()
     {
-
+        Player.UpdatingExpData += UpdateExpData;
+        Player.UpdatingZoneData += UpdateZoneData;
     }
     public void UpdateExpData(ExpData input)
     {
