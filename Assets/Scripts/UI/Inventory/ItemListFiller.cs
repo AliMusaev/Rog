@@ -22,30 +22,30 @@ public class ItemListFiller : MonoBehaviour
     
     private void DisplayEquippedItem()
     {
-        if (PlayerItemsController.EquippedItems[_ChosenItemFieldNumber] != null)
+        if (OldPlayerItemsController.EquippedItems[_ChosenItemFieldNumber] != null)
         {
             var b = Instantiate<GameObject>(ItemFieldPrefab, ContentParent.transform);
-            b.GetComponent<Item>().SetEquippedItemData(PlayerItemsController.EquippedItems[_ChosenItemFieldNumber], _Icons, _ItemIcons, _ChosenItemFieldNumber);
+            b.GetComponent<Item>().SetEquippedItemData(OldPlayerItemsController.EquippedItems[_ChosenItemFieldNumber], _Icons, _ItemIcons, _ChosenItemFieldNumber);
         }
     }
     private void DisplayNotEquippedItems()
     {
-        int type = PlayerItemsController.GetItemTypeByCellNumber(_ChosenItemFieldNumber);
-        for (int i = 0; i < PlayerItemsController.Inventory.Count; i++)
+        int type = OldPlayerItemsController.GetItemTypeByCellNumber(_ChosenItemFieldNumber);
+        for (int i = 0; i < OldPlayerItemsController.Inventory.Count; i++)
         {
-            if (PlayerItemsController.Inventory[i].ItemType == type)
+            if (OldPlayerItemsController.Inventory[i].ItemType == type)
             {
                 var a = Instantiate<GameObject>(ItemFieldPrefab, ContentParent.transform);
-                a.GetComponent<Item>().SetItemData(PlayerItemsController.Inventory[i], _Icons, _ItemIcons, _ChosenItemFieldNumber);
+                a.GetComponent<Item>().SetItemData(OldPlayerItemsController.Inventory[i], _Icons, _ItemIcons, _ChosenItemFieldNumber);
                 _CreatedItems.Add(a);
             }
         }
     }
     private void SortItems()
     {
-        int type = PlayerItemsController.GetItemTypeByCellNumber(_ChosenItemFieldNumber);
+        int type = OldPlayerItemsController.GetItemTypeByCellNumber(_ChosenItemFieldNumber);
         List<ItemData> temp = new List<ItemData>();
-        foreach (var item in PlayerItemsController.Inventory)
+        foreach (var item in OldPlayerItemsController.Inventory)
         {
             if (item.ItemType == type)
             {

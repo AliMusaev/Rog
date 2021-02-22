@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class ItemData
-{
+{ 
     public int ItemId { get; private set; }
     public int IconId { get; private set; }
     public int ItemType { get; private set; }
@@ -16,6 +16,8 @@ public class ItemData
     public int ItemGrade { get; private set; }
     public int[] ItemAdditionalsId { get; private set; } 
     public int[] ItemAdditionalsValues { get; private set; }
+
+    
 
     public readonly int Id;
 
@@ -44,7 +46,7 @@ public class ItemData
         this.Id = itemId;
     }
    
-    public ItemData(ItemData item)
+    private ItemData(ItemData item)
     {
 
         ItemId = item.ItemId;
@@ -62,6 +64,6 @@ public class ItemData
     }
     public ItemData Clone()
     {
-        return this;
+        return new ItemData(this);
     }
 }

@@ -12,7 +12,7 @@ public class ItemPresentationController : MonoBehaviour
     void Start()
     {
 
-        PlayerItemsController.ItemIsEquipped += DrawEquippedItemInItemField;
+        OldPlayerItemsController.ItemIsEquipped += DrawEquippedItemInItemField;
         _ItemSprites = Resources.LoadAll<Sprite>("Sprites/ItemsSprites");
         _DefaultImages = new Sprite[ItemFields.Length];
         for (int i = 0; i < ItemFields.Length; i++)
@@ -31,6 +31,6 @@ public class ItemPresentationController : MonoBehaviour
     // Draw equipped item icon in appropriate item field
     void DrawEquippedItemInItemField(int value)
     {
-        ItemFields[value].GetComponentInChildren<Button>().GetComponent<Image>().sprite = _ItemSprites[PlayerItemsController.EquippedItems[value].IconId];
+        ItemFields[value].GetComponentInChildren<Button>().GetComponent<Image>().sprite = _ItemSprites[OldPlayerItemsController.EquippedItems[value].IconId];
     }
 }

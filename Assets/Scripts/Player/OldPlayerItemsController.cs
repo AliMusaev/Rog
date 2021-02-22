@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public static class PlayerItemsController
+public static class OldPlayerItemsController
 {
     public static List<ItemData> Inventory { get => _inventory; set => _inventory = value; }
     public static int[] ItemsAddStats { get => _itemsAddStats;}
@@ -42,13 +42,13 @@ public static class PlayerItemsController
                 break;
             }
         }
-        EquippedItems[chosenItemFieldNumber] = new ItemData(itemData);
+        EquippedItems[chosenItemFieldNumber] = itemData.Clone();
         // Sort inventory after equip item on player.
         SortInventoryList();
         // Call event for update item list (fieldnumber needed for load same item list again)
         ItemIsEquipped.Invoke(chosenItemFieldNumber);
         CalculateItemsAddStats();
-        PlayerMainController.UpdatePlayerStats();
+        OldPlayerMainController.UpdatePlayerStats();
     }
     public static void AddNewItemInInventory(ItemData newItem)
     {

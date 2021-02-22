@@ -9,7 +9,7 @@ public class LowerPanelController : MonoBehaviour
 
     private void Start()
     {
-        PlayerMainController.PlayerStatsUpdated += UpdateStatsField;
+        OldPlayerMainController.PlayerStatsUpdated += UpdateStatsField;
     }
     private void OnEnable()
     {
@@ -19,7 +19,7 @@ public class LowerPanelController : MonoBehaviour
     {
         for (int i = 0; i < Values.Length; i++)
         {
-            Values[i].text = PlayerMainController.PlayerStats[i].ToString();
+            Values[i].text = OldPlayerMainController.PlayerStats[i].ToString();
         }
     }
 

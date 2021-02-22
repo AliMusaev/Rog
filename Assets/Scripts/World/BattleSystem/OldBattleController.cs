@@ -5,7 +5,7 @@ using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.UI;
 
-public class BattleController : MonoBehaviour
+public class OldBattleController : MonoBehaviour
 {
     public UnityEvent BattleCalcIsComplete;
     public UnityEvent CallRewardControll;

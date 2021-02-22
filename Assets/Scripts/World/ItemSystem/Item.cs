@@ -26,7 +26,7 @@ public class Item : MonoBehaviour
     }
     public void SetItemData(ItemData item, Sprite [] sprites, Sprite [] itemIcons ,int cellNumber)
     {
-        _Item = new ItemData(item);
+        _Item = item.Clone();
         ItemIcon.sprite = itemIcons[_Item.IconId];
         Name.text = _Item.ItemName;
         ValueIcon.sprite = sprites[_Item.ItemValueId];
@@ -73,7 +73,7 @@ public class Item : MonoBehaviour
 
     private void EquipItem()
     {
-        PlayerItemsController.EquipItemOnPlayer(_Item, cellNumber);
+        OldPlayerItemsController.EquipItemOnPlayer(_Item, cellNumber);
 
     }
 }

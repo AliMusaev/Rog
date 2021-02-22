@@ -35,9 +35,9 @@ public class BattleDataStorage
         playerAttacksCounter.Clear();
         enemyAttacksCounter.Clear();
         battleRepresentIsFinished = false;
-        actualZone = PlayerMainController.ActualZone;
-        playerStats = (double[])PlayerMainController.PlayerStats.Clone();
-        enemy = eCreator.CreateEnemy(BattleDataStorage.ActualZone.ZoneLvl);
+        actualZone = OldPlayerMainController.ActualZone;
+        playerStats = (double[])OldPlayerMainController.PlayerStats.Clone();
+        //enemy = eCreator.CreateEnemy(BattleDataStorage.ActualZone.ZoneLvl);
     }
 
    

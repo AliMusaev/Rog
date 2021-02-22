@@ -12,7 +12,7 @@ public class ItemListController : MonoBehaviour
     private void Start()
     {
         CloseItemsListButton.onClick.AddListener(DestroyItemsList);
-        PlayerItemsController.ItemIsEquipped += ReloadItemsList;
+        OldPlayerItemsController.ItemIsEquipped += ReloadItemsList;
     }
     public void CreateItemsListScrollview(int chosenItemFieldNumber)
     {

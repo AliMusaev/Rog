@@ -26,19 +26,19 @@ public class DataLoader
         }
         return _ItemsList;
     }
-    public List<ZoneData> LoadZoneInfoFromFile()
-   {
-        var zones = new List<ZoneData>();
-        var textAsset = Resources.Load("GameData/ZoneInfo") as TextAsset;
-        string[] texts = textAsset.text.Split('|');
-        if (texts != null)
-        {
-            for (int i = 1; i < texts.Length - 1; i++)
-            {
-                string[] temp = texts[i].Split('\t');
-                zones.Add(new ZoneData(temp));
-            }  
-        }
-        return zones;
-    }
+   // public List<ZoneHandler> LoadZoneInfoFromFile()
+   //{
+   //     var zones = new List<ZoneHandler>();
+   //     var textAsset = Resources.Load("GameData/ZoneInfo") as TextAsset;
+   //     string[] texts = textAsset.text.Split('|');
+   //     if (texts != null)
+   //     {
+   //         for (int i = 1; i < texts.Length - 1; i++)
+   //         {
+   //             string[] temp = texts[i].Split('\t');
+   //             zones.Add(new ZoneHandler(temp));
+   //         }  
+   //     }
+   //     return zones;
+   // }
 }

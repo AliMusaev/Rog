@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public static class PlayerMainController
+public static class OldPlayerMainController
 {
     public static Zone ActualZone { get; set; }
     public static event Action PlayerMoves;
@@ -40,10 +40,10 @@ public static class PlayerMainController
         // Summary of main player stats and  main items stats
         for (int i = 0; i < mainStats.Length; i++)
         {
-            mainStats[i] = PlayerItemsController.ItemsStats[i] + MainStats[i];
+            mainStats[i] = OldPlayerItemsController.ItemsStats[i] + MainStats[i];
         }
         // items additional stats preload
-        int[] itemsAddStats = PlayerItemsController.ItemsAddStats;
+        int[] itemsAddStats = OldPlayerItemsController.ItemsAddStats;
         HealthPointsCalculator(mainStats[0], itemsAddStats[0]);
         AttackPointsCalculator(mainStats[1], itemsAddStats[1]);
         DefencePointsCalculator(mainStats[2], itemsAddStats[2]);

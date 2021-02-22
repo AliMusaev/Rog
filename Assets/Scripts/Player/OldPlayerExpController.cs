@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public static class PlayerExpController
+public static class OldPlayerExpController
 {
     public static event Action<int> UpdateExpInfo;
     public static event Action<int, int> UpdateLevelAndReqiredExp;
