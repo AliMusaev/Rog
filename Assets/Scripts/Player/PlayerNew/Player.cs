@@ -12,21 +12,35 @@ public class Player
     public static event Action<StepsData> UpdatingStepsData;
     public static event Action<CurrencyData> UpdatingCurrencyData;
     public static event Action<ZoneData> UpdatingZoneData;
+    public static event Action<GaugeData> UpdatingBattleGaugeValue;
 
 
     private MainStatsHandler mainStatsHandler;
     private ExpHandler expHandler;
     private ZoneHandler zoneHandler;
-    public Player(MainStatsHandler mainStatsHandler, ExpHandler expHandler, ZoneHandler zoneHandler)
+    private GaugeController gaugeController;
+    public Player(MainStatsHandler mainStatsHandler, ExpHandler expHandler, ZoneHandler zoneHandler, GaugeController gaugeController)
     {
         this.mainStatsHandler = mainStatsHandler;
         this.expHandler = expHandler;
         this.zoneHandler = zoneHandler;
+        this.gaugeController = gaugeController;
         UIController.SendingNewPlayerStats += RewriteMainStats;
         Zone.SendingZoneData += RewriteZoneData;
+        EnemyGauge.SendingNewPosition += UpdateEnemyGauge;
         UpdatingMainStats.Invoke(this.mainStatsHandler.GetData());
         UpdatingExpData.Invoke(this.expHandler.GetData());
         UpdatingExpData.Invoke(this.expHandler.GetData());
+    }
+    private void UpdateEnemyGauge(float newXpos, float newZpos)
+    {
+        gaugeController.Update(newXpos, newZpos);
+        UpdatingBattleGaugeValue.Invoke(gaugeController.GetGaugeValue());
+        if (gaugeController.CheckStatus())
+        {
+            
+        }
+        
     }
     private void RewriteZoneData(ZoneData input)
     {
@@ -34,6 +48,11 @@ public class Player
         UpdatingZoneData.Invoke(zoneHandler.GetData());
     }
     private void RewriteMainStats(MainStatsData input)
+    {
+        mainStatsHandler.ReqUpdateMainStats(input);
+        UpdatingMainStats.Invoke(mainStatsHandler.GetData());
+    }
+    private void RewriteMainStats(int input)
     {
         mainStatsHandler.ReqUpdateMainStats(input);
         UpdatingMainStats.Invoke(mainStatsHandler.GetData());

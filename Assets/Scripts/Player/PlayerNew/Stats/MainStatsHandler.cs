@@ -5,6 +5,7 @@ using UnityEngine;
 public class MainStatsHandler
 {
     private IMainStats dataController;
+    private readonly int FPbyLevelUp = 25;
     public MainStatsHandler(IMainStats mainStatsController)
     {
         this.dataController = mainStatsController;
@@ -20,6 +21,12 @@ public class MainStatsHandler
         {
             Debug.LogWarning("Values has not assign in MainStatsHandler");
         }
+    }
+    public void ReqUpdateMainStats(int newFP)
+    {
+        int value = newFP * FPbyLevelUp;
+        // Need to add check
+            dataController.RewriteMainStatsData(newFP);
     }
     public MainStatsData GetData()
     {
@@ -40,6 +47,5 @@ public class MainStatsHandler
         return result;
         
     }
-
 }
 

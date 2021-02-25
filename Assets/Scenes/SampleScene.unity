@@ -16280,7 +16280,6 @@ GameObject:
   - component: {fileID: 1376503055}
   - component: {fileID: 1376503054}
   - component: {fileID: 1376503053}
-  - component: {fileID: 1376503056}
   m_Layer: 8
   m_Name: Terrain
   m_TagString: Untagged
@@ -16347,19 +16346,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1376503056
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1376503052}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c2bec10f1d4b82c428b3fdac76aff483, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  Player: {fileID: 1838313600}
 --- !u!1 &1377791202
 GameObject:
   m_ObjectHideFlags: 0
@@ -17876,7 +17862,7 @@ MonoBehaviour:
   reqExp: {fileID: 262807870}
   zoneLevel: {fileID: 1640744919}
   zoneInfo: {fileID: 1850438739}
-  enemyGauge: {fileID: 606638770}
+  enemyGaugeSlider: {fileID: 606638770}
 --- !u!114 &1469525643
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -22393,6 +22379,7 @@ GameObject:
   - component: {fileID: 1838313597}
   - component: {fileID: 1838313596}
   - component: {fileID: 1838313600}
+  - component: {fileID: 1838313603}
   - component: {fileID: 1838313601}
   - component: {fileID: 1838313602}
   m_Layer: 0
@@ -22530,6 +22517,19 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
+--- !u!114 &1838313603
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1838313595}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c2bec10f1d4b82c428b3fdac76aff483, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  PlayersBody: {fileID: 1838313602}
 --- !u!1 &1840835271
 GameObject:
   m_ObjectHideFlags: 0

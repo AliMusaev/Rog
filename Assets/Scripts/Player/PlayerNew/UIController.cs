@@ -21,6 +21,7 @@ public class UIController
         Player.UpdatingMainStats += UpdateMainStats;
         Player.UpdatingExpData += UpdateExpData;
         Player.UpdatingZoneData += UpdateZoneData;
+        Player.UpdatingBattleGaugeValue += UpdateGaugeValue;
     }
 
     private void UpdateExpData(ExpData input)
@@ -31,7 +32,10 @@ public class UIController
     {
         hud.UpdateZoneData(input);
     }
-
+    private void UpdateGaugeValue(GaugeData input)
+    {
+        hud.UpdateGaugeValue(input);
+    }
 
 
 

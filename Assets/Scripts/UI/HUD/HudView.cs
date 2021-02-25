@@ -16,7 +16,7 @@ public class HudView : MonoBehaviour
     [Header("Zone Info")]
     [SerializeField] private Text zoneLevel;
     [SerializeField] private Text zoneInfo;
-    [SerializeField] private Slider enemyGauge;
+    [SerializeField] private Slider enemyGaugeSlider;
 
     private void Start()
     {
@@ -43,7 +43,12 @@ public class HudView : MonoBehaviour
         this.zoneLevel.text = input.Level.ToString();
         zoneInfoBuilder(input);
     }
-
+    public void RepresentGaugeData(GaugeData input)
+    {
+        enemyGaugeSlider.minValue = 0;
+        enemyGaugeSlider.maxValue = input.maxDist;
+        enemyGaugeSlider.value = input.CurrentDist;
+    }
     private void zoneInfoBuilder(ZoneData input)
     {
         string value = null;

@@ -2,18 +2,20 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-class PlayerDataController : IMainStats, IExp, IZoneData
+class PlayerDataController : IMainStats, IExp, IZoneData, IGauge
 {
     private MainStatsData mainStats;
     private ItemStatsData itemsStats;
     private ExpData expData;
     private ZoneData zoneData;
+    private GaugeData positionData;
     public PlayerDataController()
     {
         mainStats = new MainStatsData();
         expData = new ExpData();
         itemsStats = new ItemStatsData();
         zoneData = new ZoneData();
+        positionData = new GaugeData();
         mainStats.Attack = 5;
         mainStats.Defence = 10;
         mainStats.Health = 30;
@@ -29,6 +31,15 @@ class PlayerDataController : IMainStats, IExp, IZoneData
         retVal.CurrentExp = expData.CurrentExp;
         retVal.ReqExp = expData.ReqExp;
         retVal.Level = expData.Level;
+        return retVal;
+    }
+
+    public GaugeData GetLastPosition()
+    {
+        GaugeData retVal = new GaugeData();
+        retVal.Xpos = positionData.Xpos;
+        retVal.Zpos = positionData.Zpos;
+        retVal.CurrentDist = positionData.CurrentDist;
         return retVal;
     }
 
@@ -66,6 +77,18 @@ class PlayerDataController : IMainStats, IExp, IZoneData
         this.mainStats.Attack = input.Attack;
         this.mainStats.Defence = input.Defence;
         this.mainStats.Points = input.Points;
+    }
+
+    public void RewriteMainStatsData(int newFP)
+    {
+        this.mainStats.Points += newFP;
+    }
+
+    public void RewritePosition(GaugeData input)
+    {
+        this.positionData.Xpos = input.Xpos;
+        this.positionData.Zpos = input.Zpos;
+        this.positionData.CurrentDist = input.CurrentDist;
     }
 
     public void RewriteZoneData(ZoneData input)

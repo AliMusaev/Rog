@@ -10,6 +10,7 @@ public class HudHandler
     private ExpData expData;
     private StepsData playerSteps;
     private ZoneData zoneData;
+    private GaugeData gaugeData;
     public HudHandler()
     {
         Player.UpdatingExpData += UpdateExpData;
@@ -24,5 +25,10 @@ public class HudHandler
     {
         zoneData = input;
         View.RepresentZoneData(input);
+    }
+    public void UpdateGaugeValue(GaugeData input)
+    {
+        this.gaugeData = input;
+        View.RepresentGaugeData(input);
     }
 }

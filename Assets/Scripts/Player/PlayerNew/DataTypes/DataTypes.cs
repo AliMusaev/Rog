@@ -28,7 +28,14 @@ public class ZoneData
     public int DropMulti { get; set; }
     public int SetpsLeft { get; set; }
 }
+public class GaugeData
+{
+    public readonly float maxDist = 100f;
+    public float Xpos { get; set; }
+    public float Zpos { get; set; }
+    public float CurrentDist { get; set; }
 
+}
 public class StepsData
 {
     public int Value { get; set; }

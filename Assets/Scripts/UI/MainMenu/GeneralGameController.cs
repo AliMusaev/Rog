@@ -12,6 +12,7 @@ public class GeneralGameController : MonoBehaviour
     MainStatsHandler mainStatsHandler;
     ExpHandler expHandler;
     ZoneHandler zoneHandler;
+    GaugeController gaugeController;
 
     private void Start()
     {
@@ -20,6 +21,7 @@ public class GeneralGameController : MonoBehaviour
         expHandler = new ExpHandler(playerDataController);
         mainStatsHandler = new MainStatsHandler(playerDataController);
         zoneHandler = new ZoneHandler(playerDataController);
+        gaugeController = new GaugeController(playerDataController);
 
         uIController = new UIController();
 
@@ -29,7 +31,7 @@ public class GeneralGameController : MonoBehaviour
     {
         
         battleController = new BattleController();
-        player = new Player(mainStatsHandler, expHandler, zoneHandler);
+        player = new Player(mainStatsHandler, expHandler, zoneHandler, gaugeController);
         OldPlayerMainController.InitializeNewPlayer();
         OldPlayerItemsController.InitializePlayerInventory();
         OldPlayerExpController.InitializeNewExpInfo();

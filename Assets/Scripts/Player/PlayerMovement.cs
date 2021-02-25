@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
@@ -7,6 +8,8 @@ using UnityEngine.UI;
 
 public class PlayerMovement : MonoBehaviour
 {
+
+
     public LayerMask WhatCanBeClick;
     public GraphicRaycaster graphicRaycaster;
     private NavMeshAgent navigationMesh;
@@ -21,7 +24,6 @@ public class PlayerMovement : MonoBehaviour
         ped = new PointerEventData(null);
     }
 
-    // Update is called once per frame
     void Update()
     {
 
@@ -40,6 +42,5 @@ public class PlayerMovement : MonoBehaviour
             }
             results.Clear();
         }
-
     }
 }

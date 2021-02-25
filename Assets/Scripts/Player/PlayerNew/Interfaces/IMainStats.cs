@@ -6,6 +6,7 @@ public interface IMainStats
 {
     MainStatsData GetMainStatsData();
     void RewriteMainStatsData(MainStatsData newData);
+    void RewriteMainStatsData(int newFP);
 }
 public interface IExp
 {
@@ -21,4 +22,9 @@ public interface IZoneData
 {
     ZoneData GetZoneData();
     void RewriteZoneData(ZoneData input);
+}
+public interface IGauge
+{
+    GaugeData GetLastPosition();
+    void RewritePosition(GaugeData input);
 }

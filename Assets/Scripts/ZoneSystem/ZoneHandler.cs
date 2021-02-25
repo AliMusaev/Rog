@@ -11,7 +11,6 @@ public class ZoneHandler
         this.dataController = dataController;
         
     }
-
     public void RewriteZoneData(ZoneData input)
     {
         dataController.RewriteZoneData(input);

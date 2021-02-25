@@ -19,7 +19,7 @@ public class OldBattleController : MonoBehaviour
     private BattleMath bMath;
     private void Start()
     {
-        EnemyTrigger.CallBattle += HandleBattle;
+        //EnemyGauge.CallBattle += HandleBattle;
         BattleWindow.SetActive(false);
     }
     private void Update()
