@@ -3,57 +3,40 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using UnityEngine;
 
-public class InventoryController :  ICloneable
+public class InventoryController
 {
-    private List<ItemData> inventoryCollection;
-    public ReadOnlyCollection<ItemData> ChoosenItemsCollection { get; private set; }
+    IInventory dataController;
+    
 
-    public InventoryController()
+    public InventoryController(IInventory dataController)
     {
-        inventoryCollection = new List<ItemData>();
+        this.dataController = dataController;
     }
-    public InventoryController(InventoryController loadedInventory)
+    public InventorySafetyData GetItemsListByItemType(int itemType)
     {
-        inventoryCollection = new List<ItemData>();
-        foreach (var item in loadedInventory.inventoryCollection)
-        {
-            this.inventoryCollection.Add(item.Clone());
-        }
-    }
-    public void GetItemsListByItemType(int itemType)
-    {
-        UpdateInventoryCollection(itemType);
-    }
-    private void UpdateInventoryCollection(int itemType)
-    {
-        List<ItemData> tempList = new List<ItemData>();
-        foreach (var item in inventoryCollection)
+        List<ItemData> temp = new List<ItemData>();
+        foreach (var item in dataController.GetInventoryData().InventoryCollection)
         {
             if (item.ItemType == itemType)
             {
-                tempList.Add(item.Clone());
+                temp.Add((ItemData)item.Clone());
             }
         }
-        ChoosenItemsCollection = tempList.AsReadOnly();
+        return new InventorySafetyData(temp);  
     }
     public void AddItemInInventory(ItemData newItem)
     {
-        inventoryCollection.Add(newItem.Clone());
-        SortInventoryList();
+        dataController.AddNewItem(newItem);
     }
     public void RemoveItemFromInventory(ItemData item)
     {
-        inventoryCollection.Remove(item);
-        SortInventoryList();
+        dataController.RemoveItem(item);
     }
-    private void SortInventoryList()
+    public InventorySafetyData GetInventoryCollection()
     {
-        inventoryCollection.Sort((x, y) => x.Id.CompareTo(y.Id));
-    } 
-    // Update readonly collection for sending in UI
+        return dataController.GetInventoryData();
+    }
+ 
    
-    public object Clone()
-    {
-        return new InventoryController(this);
-    }
+  
 }

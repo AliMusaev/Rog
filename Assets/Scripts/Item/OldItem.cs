@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class Item : MonoBehaviour
+public class OldItem : MonoBehaviour
 {
     public Image ItemIcon;
     public Text Name;
@@ -26,11 +26,11 @@ public class Item : MonoBehaviour
     }
     public void SetItemData(ItemData item, Sprite [] sprites, Sprite [] itemIcons ,int cellNumber)
     {
-        _Item = item.Clone();
+        _Item = (ItemData)item.Clone();
         ItemIcon.sprite = itemIcons[_Item.IconId];
         Name.text = _Item.ItemName;
-        ValueIcon.sprite = sprites[_Item.ItemValueId];
-        Value.text = _Item.ItemValue.ToString();
+        ValueIcon.sprite = sprites[_Item.MainEffect[0,0]];
+        Value.text = _Item.MainEffect[1, 0].ToString();
         this.cellNumber = cellNumber;
         DrawAdditionalValues(sprites);
     }
@@ -43,20 +43,20 @@ public class Item : MonoBehaviour
     private void  DrawAdditionalValues(Sprite [] sprites)
     {
         
-        for (int i = 0; i < AddValueFields.Length; i++)
-        {
-            if (_Item.ItemAdditionalsId[i] == -1)
-                AddValueFields[i].SetActive(false);
-            else
-            {
-                foreach (var item in AddValueFields[i].GetComponentsInChildren<Image>())
-                {
-                    if (item.name == "StatIcon")
-                        item.sprite = sprites[_Item.ItemAdditionalsId[i]];
-                }
-                AddValueFields[i].GetComponentInChildren<Text>().text = _Item.ItemAdditionalsValues[i].ToString();
-            }
-        }
+        //for (int i = 0; i < AddValueFields.Length; i++)
+        //{
+        //    if (_Item.ItemAdditionalsId[i] == -1)
+        //        AddValueFields[i].SetActive(false);
+        //    else
+        //    {
+        //        foreach (var item in AddValueFields[i].GetComponentsInChildren<Image>())
+        //        {
+        //            if (item.name == "StatIcon")
+        //                item.sprite = sprites[_Item.ItemAdditionalsId[i]];
+        //        }
+        //        AddValueFields[i].GetComponentInChildren<Text>().text = _Item.ItemAdditionalsValues[i].ToString();
+        //    }
+        //}
     }
 
 

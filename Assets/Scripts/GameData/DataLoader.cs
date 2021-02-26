@@ -18,10 +18,7 @@ public class DataLoader
                 string[] temp = texts[i].Split('\t');
                 ItemData item = new ItemData(temp, _ItemId);
                 _ItemId++;
-                if (item.ItemIsExist)
-                {
-                    _ItemsList.Add(item);
-                }
+                _ItemsList.Add(item);
             }      
         }
         return _ItemsList;

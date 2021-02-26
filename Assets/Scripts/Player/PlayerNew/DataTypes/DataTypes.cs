@@ -28,6 +28,13 @@ public class ZoneData
     public int DropMulti { get; set; }
     public int SetpsLeft { get; set; }
 }
+
+public class RewardData
+{
+    public ItemData Item { get; }
+    public int Exp { get; }
+    public int Gold { get; }
+}
 public class GaugeData
 {
     public readonly float maxDist = 100f;
@@ -40,7 +47,7 @@ public class StepsData
 {
     public int Value { get; set; }
 }
-public class ItemStatsData
+public class StatsData
 {
     public int Health { get; set; }
     public int Attack { get; set; }
@@ -54,11 +61,40 @@ public class ItemStatsData
 }
 public class InventoryData
 {
-    public ReadOnlyCollection<ItemData> InventoryCollection { get; set; }
+    public List<ItemData> InventoryCollection { get; set; }
+    public InventoryData()
+    {
+        InventoryCollection = new List<ItemData>();
+    }
 }
-public class EquippedItemsData
+public class InventorySafetyData
 {
-    public ReadOnlyDictionary<int , ItemData> EquipCollection { get; set; }
+    public ReadOnlyCollection<ItemData> InventoryCollection { get; }
+    public InventorySafetyData(List<ItemData> inventoryCollection)
+    {
+        this.InventoryCollection = new ReadOnlyCollection<ItemData>(inventoryCollection);
+    }
+}
+public class EquipCellsSafetyData
+{
+    public ReadOnlyDictionary<int , ItemData> EquipCollection { get; }
+    public EquipCellsSafetyData(Dictionary<int, ItemData> equipCollection)
+    {
+        this.EquipCollection = new ReadOnlyDictionary<int, ItemData>(equipCollection);
+    }
+}
+public class EquipCellsData
+{
+    public Dictionary<int , ItemData> EquipCollection { get; set; }
+    public EquipCellsData()
+    {
+        EquipCollection = new Dictionary<int, ItemData>()
+        {
+            {0 ,null },{1 ,null },{2 ,null },{3 ,null },{4 ,null },
+            {5 ,null },{6 ,null },{7 ,null },{8 ,null },{9 ,null },
+            {10 ,null },{11 ,null },{12 ,null },{13 ,null },
+        };
+    }
 }
 
 

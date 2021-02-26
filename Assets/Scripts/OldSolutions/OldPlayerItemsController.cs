@@ -36,13 +36,13 @@ public static class OldPlayerItemsController
             _inventory.Add(EquippedItems[chosenItemFieldNumber]);
         foreach (var item in _inventory)
         {
-            if (itemData.Id == item.Id)
+            if (itemData.ObjectId == item.ObjectId)
             {
                 _inventory.Remove(item);
                 break;
             }
         }
-        EquippedItems[chosenItemFieldNumber] = itemData.Clone();
+        EquippedItems[chosenItemFieldNumber] = (ItemData)itemData.Clone();
         // Sort inventory after equip item on player.
         SortInventoryList();
         // Call event for update item list (fieldnumber needed for load same item list again)
@@ -93,7 +93,7 @@ public static class OldPlayerItemsController
     }
     private static void SortInventoryList()
     { 
-        _inventory.Sort((x, y) => x.Id.CompareTo(y.Id));
+        _inventory.Sort((x, y) => x.ObjectId.CompareTo(y.ObjectId));
     }
     private static void CalculateItemsAddStats()
     {
@@ -106,33 +106,33 @@ public static class OldPlayerItemsController
             _itemsMainStats[i] = 0;
         }
         
-        foreach (var item in EquippedItems)
-        {
-            // If item is equipped
-            if (item.Value != null)
-            {   // Get the main stat from equipped item
-                _itemsMainStats[item.Value.ItemValueId] += item.Value.ItemValue;
-                // Get additional stats from equipped item
-                for (int i = 0; i < item.Value.ItemAdditionalsId.Length; i++)
-                {
-                    // If additional stats is exist
-                    if (item.Value.ItemAdditionalsId[i]!= -1)
-                    {
-                        // Stat overload check
-                        if (_itemsAddStats[item.Value.ItemAdditionalsId[i]] + item.Value.ItemAdditionalsValues[i] <= _itemsAddStatsMaxValues[item.Value.ItemAdditionalsId[i]])
-                        {
-                            _itemsAddStats[item.Value.ItemAdditionalsId[i]] += item.Value.ItemAdditionalsValues[i];
-                        }
-                        // If stat is overloaded then set max acceptable value
-                        else
-                        {
-                            _itemsAddStats[item.Value.ItemAdditionalsId[i]] = _itemsAddStatsMaxValues[item.Value.ItemAdditionalsId[i]];
-                        }
+        //foreach (var item in EquippedItems)
+        //{
+        //    // If item is equipped
+        //    if (item.Value != null)
+        //    {   // Get the main stat from equipped item
+        //        _itemsMainStats[item.Value.ItemValueId] += item.Value.ItemValue;
+        //        // Get additional stats from equipped item
+        //        for (int i = 0; i < item.Value.ItemAdditionalsId.Length; i++)
+        //        {
+        //            // If additional stats is exist
+        //            if (item.Value.ItemAdditionalsId[i]!= -1)
+        //            {
+        //                // Stat overload check
+        //                if (_itemsAddStats[item.Value.ItemAdditionalsId[i]] + item.Value.ItemAdditionalsValues[i] <= _itemsAddStatsMaxValues[item.Value.ItemAdditionalsId[i]])
+        //                {
+        //                    _itemsAddStats[item.Value.ItemAdditionalsId[i]] += item.Value.ItemAdditionalsValues[i];
+        //                }
+        //                // If stat is overloaded then set max acceptable value
+        //                else
+        //                {
+        //                    _itemsAddStats[item.Value.ItemAdditionalsId[i]] = _itemsAddStatsMaxValues[item.Value.ItemAdditionalsId[i]];
+        //                }
                         
-                    }
-                }
-            }
-        }
+        //            }
+        //        }
+        //    }
+        //}
     }
 
    

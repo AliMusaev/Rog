@@ -25,7 +25,7 @@ public class ItemListFiller : MonoBehaviour
         if (OldPlayerItemsController.EquippedItems[_ChosenItemFieldNumber] != null)
         {
             var b = Instantiate<GameObject>(ItemFieldPrefab, ContentParent.transform);
-            b.GetComponent<Item>().SetEquippedItemData(OldPlayerItemsController.EquippedItems[_ChosenItemFieldNumber], _Icons, _ItemIcons, _ChosenItemFieldNumber);
+            b.GetComponent<OldItem>().SetEquippedItemData(OldPlayerItemsController.EquippedItems[_ChosenItemFieldNumber], _Icons, _ItemIcons, _ChosenItemFieldNumber);
         }
     }
     private void DisplayNotEquippedItems()
@@ -36,7 +36,7 @@ public class ItemListFiller : MonoBehaviour
             if (OldPlayerItemsController.Inventory[i].ItemType == type)
             {
                 var a = Instantiate<GameObject>(ItemFieldPrefab, ContentParent.transform);
-                a.GetComponent<Item>().SetItemData(OldPlayerItemsController.Inventory[i], _Icons, _ItemIcons, _ChosenItemFieldNumber);
+                a.GetComponent<OldItem>().SetItemData(OldPlayerItemsController.Inventory[i], _Icons, _ItemIcons, _ChosenItemFieldNumber);
                 _CreatedItems.Add(a);
             }
         }

@@ -13,18 +13,21 @@ public class Player
     public static event Action<CurrencyData> UpdatingCurrencyData;
     public static event Action<ZoneData> UpdatingZoneData;
     public static event Action<GaugeData> UpdatingBattleGaugeValue;
-
+    public static event Action<EquipCellsSafetyData> UpdatingEquipCellsData;
+    public static event Action<InventorySafetyData> UpdatingInventoryData;
 
     private MainStatsHandler mainStatsHandler;
     private ExpHandler expHandler;
     private ZoneHandler zoneHandler;
     private GaugeController gaugeController;
-    public Player(MainStatsHandler mainStatsHandler, ExpHandler expHandler, ZoneHandler zoneHandler, GaugeController gaugeController)
+    private EquipController equipmentController;
+    public Player(MainStatsHandler mainStatsHandler, ExpHandler expHandler, ZoneHandler zoneHandler, GaugeController gaugeController, EquipController equipmentController)
     {
         this.mainStatsHandler = mainStatsHandler;
         this.expHandler = expHandler;
         this.zoneHandler = zoneHandler;
         this.gaugeController = gaugeController;
+        this.equipmentController = equipmentController;
         UIController.SendingNewPlayerStats += RewriteMainStats;
         Zone.SendingZoneData += RewriteZoneData;
         EnemyGauge.SendingNewPosition += UpdateEnemyGauge;
@@ -32,6 +35,8 @@ public class Player
         UpdatingExpData.Invoke(this.expHandler.GetData());
         UpdatingExpData.Invoke(this.expHandler.GetData());
     }
+
+
     private void UpdateEnemyGauge(float newXpos, float newZpos)
     {
         gaugeController.Update(newXpos, newZpos);

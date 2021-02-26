@@ -1,21 +1,26 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using UnityEngine;
 
-class PlayerDataController : IMainStats, IExp, IZoneData, IGauge
+class PlayerDataController : IMainStats, IExp, IZoneData, IGauge, IInventory, IEquipCells
 {
     private MainStatsData mainStats;
-    private ItemStatsData itemsStats;
+    private StatsData itemsStats;
     private ExpData expData;
     private ZoneData zoneData;
     private GaugeData positionData;
+    private InventoryData inventoryData;
+    private EquipCellsData equipCellsData;
     public PlayerDataController()
     {
         mainStats = new MainStatsData();
         expData = new ExpData();
-        itemsStats = new ItemStatsData();
+        itemsStats = new StatsData();
         zoneData = new ZoneData();
         positionData = new GaugeData();
+        equipCellsData = new EquipCellsData();
+        inventoryData = new InventoryData();
         mainStats.Attack = 5;
         mainStats.Defence = 10;
         mainStats.Health = 30;
@@ -25,6 +30,26 @@ class PlayerDataController : IMainStats, IExp, IZoneData, IGauge
         expData.ReqExp = 10;
     }
 
+    public void AddNewItem(ItemData newItem)
+    {
+        inventoryData.InventoryCollection.Add((ItemData)newItem.Clone());
+    }
+
+    public void EquipItem(int cell, ItemData Item)
+    {
+        equipCellsData.EquipCollection[cell] = (ItemData)Item.Clone();
+    }
+
+    public ItemData ExtractOldItemFromCell(int cell)
+    {
+        return (ItemData)equipCellsData.EquipCollection[cell].Clone();
+    }
+
+    public EquipCellsSafetyData GetEquipCells()
+    {
+        return new EquipCellsSafetyData(equipCellsData.EquipCollection);
+    }
+
     public ExpData GetExpData()
     {
         ExpData retVal = new ExpData();
@@ -32,6 +57,11 @@ class PlayerDataController : IMainStats, IExp, IZoneData, IGauge
         retVal.ReqExp = expData.ReqExp;
         retVal.Level = expData.Level;
         return retVal;
+    }
+
+    public InventorySafetyData GetInventoryData()
+    {
+        return new InventorySafetyData(inventoryData.InventoryCollection);
     }
 
     public GaugeData GetLastPosition()
@@ -62,6 +92,20 @@ class PlayerDataController : IMainStats, IExp, IZoneData, IGauge
         retVal.DropMulti = zoneData.DropMulti;
         retVal.GoldMulti = zoneData.GoldMulti;
         return retVal;
+    }
+
+    public void RemoveItem(ItemData removedItem)
+    {
+        foreach (var item in inventoryData.InventoryCollection)
+        {
+            if (item.ObjectId == removedItem.ObjectId)
+            {
+                inventoryData.InventoryCollection.Remove(item);
+                break;
+            }
+        }
+        // Sorting inventory by item id
+        inventoryData.InventoryCollection.Sort((x, y) => x.ObjectId.CompareTo(y.ObjectId));
     }
 
     public void RewriteExpData(ExpData input)
@@ -99,4 +143,6 @@ class PlayerDataController : IMainStats, IExp, IZoneData, IGauge
         zoneData.GoldMulti = input.GoldMulti;
         zoneData.DropMulti = input.DropMulti;
     }
+
+
 }
