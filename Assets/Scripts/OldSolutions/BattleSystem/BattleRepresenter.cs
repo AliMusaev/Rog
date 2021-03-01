@@ -56,7 +56,7 @@ public class BattleRepresenter : MonoBehaviour
         playerAttacks = BattleDataStorage.PlayerAttacksCounter;
         enemyAttacks = BattleDataStorage.EnemyAttacksCounter;
         playerHp = BattleDataStorage.PlayerStats[0];
-        enemyHp = BattleDataStorage.Enemy.EnemyHealth;
+        enemyHp = BattleDataStorage.Enemy.Health;
         EnemyHpSlider.maxValue = (float)enemyHp;
         EnemyHpSlider.value = (float)enemyHp;
         PlayerHpSlider.maxValue = (float)playerHp;

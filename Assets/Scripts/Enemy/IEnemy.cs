@@ -4,7 +4,7 @@ using UnityEngine;
 
 public interface IEnemy
 {
-    double EnemyHealth { get; set; }
-    double EnemyAttack { get; }
-    double EnemyDefence { get; }
+    double Health { get; set; }
+    double Attack { get; }
+    double Defence { get; }
 }

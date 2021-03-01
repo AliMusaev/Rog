@@ -49,6 +49,7 @@ public class StepsData
 }
 public class StatsData
 {
+
     public int Health { get; set; }
     public int Attack { get; set; }
     public int Defence { get; set; }
@@ -58,6 +59,8 @@ public class StatsData
     public int BlockChance { get; set; }
     public int DropChance { get; set; }
     public int GoldMulti { get; set; }
+    public readonly int MaxMainStatsValue = int.MaxValue;
+    public readonly int MaxAddStatsValue = 600;
 }
 public class InventoryData
 {

@@ -25,11 +25,11 @@ public class BattleMath
     }
     public bool Fight()
     {
-        while (playerStats[0] > 0 && enemyParams.EnemyHealth > 0)
+        while (playerStats[0] > 0 && enemyParams.Health > 0)
         {
             
             PlayerAttacking();
-            if (enemyParams.EnemyHealth > 0)
+            if (enemyParams.Health > 0)
                 EnemyAttacking();
         }
         if (playerStats[0] > 0)
@@ -39,15 +39,15 @@ public class BattleMath
     }
     void PlayerAttacking()
     {
-        double dmgCalulated = DmgCalculate(playerStats[1], enemyParams.EnemyDefence);
-        enemyParams.EnemyHealth = dmgCalulated;
-        if (enemyParams.EnemyHealth < 0)
-            enemyParams.EnemyHealth = 0;
+        double dmgCalulated = DmgCalculate(playerStats[1], enemyParams.Defence);
+        enemyParams.Health = dmgCalulated;
+        if (enemyParams.Health < 0)
+            enemyParams.Health = 0;
         BattleDataStorage.PlayerAttacksCounter.Add(dmgCalulated);
     }
     void EnemyAttacking()
     {
-        double dmgCalulated = DmgCalculate(enemyParams.EnemyAttack, playerStats[2]);
+        double dmgCalulated = DmgCalculate(enemyParams.Attack, playerStats[2]);
         playerStats[0] -= dmgCalulated;
         if (playerStats[0] < 0)
             playerStats[0] = 0;
