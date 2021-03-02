@@ -15,8 +15,8 @@ namespace Server
     public partial class UserAccount
     {
         public int Id { get; set; }
-        public string Loign { get; set; }
-        public string Pass { get; set; }
+        public string UserLogin { get; set; }
+        public string UserPassword { get; set; }
         public string Email { get; set; }
     }
 }

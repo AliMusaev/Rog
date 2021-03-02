@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data.Entity.Validation;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -8,35 +9,69 @@ namespace Server
 {
     public class DBController
     {
-        TestDbEntities1 context;
-
+        private RogDBEntities2 context;
         public DBController()
         {
-            context = new TestDbEntities1();
+            context = new RogDBEntities2();
         }
 
-        public string RequestHandler(string message)
+        public string HanldeUseRequest(string req)
         {
             string retVal = null;
-            if (message.StartsWith("a1"))
+            if (req.StartsWith("regQ"))
             {
-                retVal = CreateUser(message);
+                retVal = RegistrationReq(DecompileReq(req));
+
             }
-
             return retVal;
-            
         }
-
-        private string CreateUser(string message)
+        private string RegistrationReq(List<string> req)
         {
-            string[] values = message.Split('|');
-            int id;
-            Int32.TryParse(values[1], out id);
-
-            UserAccount userAccount = new UserAccount { Id = id, Email = values[2], Loign = values[3], Pass = values[4]};
-            context.UserAccount.Add(userAccount);
-            context.SaveChanges();
-            return $"User {values[3]} has been created";
+            string retVal = null;
+            UserAccount userAccount = new UserAccount();
+            userAccount.UserLogin = req[0];
+            userAccount.UserPassword = req[1];
+            userAccount.Email = req[2];
+            try
+            {
+                context.UserAccount.Add(userAccount);
+                context.SaveChanges();
+                retVal = $"User has been created";
+                Console.WriteLine($"User has been created");
+            }
+            catch (DbEntityValidationException ex)
+            {
+                foreach (var eve in ex.EntityValidationErrors)
+                {
+                    Console.WriteLine("Entity of type \"{0}\" in state \"{1}\" has the following validation errors:",
+                        eve.Entry.Entity.GetType().Name, eve.Entry.State);
+                    foreach (var ve in eve.ValidationErrors)
+                    {
+                        Console.WriteLine("- Property: \"{0}\", Error: \"{1}\"",
+                            ve.PropertyName, ve.ErrorMessage);
+                    }
+                }
+                throw;
+                //Console.WriteLine(ex.Message);
+                //retVal = $"Error";
+            }
+            finally
+            {
+                
+            }
+            return retVal;
         }
+        private List<string> DecompileReq(string req)
+        {
+            // Parse user request and create new list
+            List<string> retVal = new List<string>(req.Split('|'));
+            // Remove request identificator
+            retVal.Remove(retVal[0]);
+            return retVal;
+        }
+        //private string CompileAnswer()
+        //{
+
+        //}
     }
 }

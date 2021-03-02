@@ -10,3 +10,27 @@ C:\Users\UserName\source\repos\Server\Server\bin\Debug\EntityFramework.SqlServer
 C:\Users\UserName\source\repos\Server\Server\bin\Debug\EntityFramework.xml
 C:\Users\UserName\source\repos\Server\Server\bin\Debug\EntityFramework.SqlServer.xml
 C:\Users\UserName\source\repos\Server\Server\obj\Debug\Server.csproj.CopyComplete
+Z:\Рабочий стол\Server\Server\bin\Debug\Server.exe.config
+Z:\Рабочий стол\Server\Server\bin\Debug\Server.exe
+Z:\Рабочий стол\Server\Server\bin\Debug\Server.pdb
+Z:\Рабочий стол\Server\Server\bin\Debug\EntityFramework.dll
+Z:\Рабочий стол\Server\Server\bin\Debug\EntityFramework.SqlServer.dll
+Z:\Рабочий стол\Server\Server\bin\Debug\EntityFramework.xml
+Z:\Рабочий стол\Server\Server\bin\Debug\EntityFramework.SqlServer.xml
+Z:\Рабочий стол\Server\Server\obj\Debug\Server.csprojAssemblyReference.cache
+Z:\Рабочий стол\Server\Server\obj\Debug\Server.csproj.CoreCompileInputs.cache
+Z:\Рабочий стол\Server\Server\obj\Debug\Server.csproj.CopyComplete
+Z:\Рабочий стол\Server\Server\obj\Debug\Server.exe
+Z:\Рабочий стол\Server\Server\obj\Debug\Server.pdb
+Z:\Projects\Games\Rog\Server\Server\bin\Debug\Server.exe.config
+Z:\Projects\Games\Rog\Server\Server\bin\Debug\Server.exe
+Z:\Projects\Games\Rog\Server\Server\bin\Debug\Server.pdb
+Z:\Projects\Games\Rog\Server\Server\bin\Debug\EntityFramework.dll
+Z:\Projects\Games\Rog\Server\Server\bin\Debug\EntityFramework.SqlServer.dll
+Z:\Projects\Games\Rog\Server\Server\bin\Debug\EntityFramework.xml
+Z:\Projects\Games\Rog\Server\Server\bin\Debug\EntityFramework.SqlServer.xml
+Z:\Projects\Games\Rog\Server\Server\obj\Debug\Server.csprojAssemblyReference.cache
+Z:\Projects\Games\Rog\Server\Server\obj\Debug\Server.csproj.CoreCompileInputs.cache
+Z:\Projects\Games\Rog\Server\Server\obj\Debug\Server.csproj.CopyComplete
+Z:\Projects\Games\Rog\Server\Server\obj\Debug\Server.exe
+Z:\Projects\Games\Rog\Server\Server\obj\Debug\Server.pdb

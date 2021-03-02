@@ -13,10 +13,10 @@ namespace Server
     using System.Data.Entity;
     using System.Data.Entity.Infrastructure;
     
-    public partial class TestDbEntities1 : DbContext
+    public partial class RogDBEntities2 : DbContext
     {
-        public TestDbEntities1()
-            : base("name=TestDbEntities1")
+        public RogDBEntities2()
+            : base("name=RogDBEntities2")
         {
         }
     
@@ -26,9 +26,5 @@ namespace Server
         }
     
         public virtual DbSet<UserAccount> UserAccount { get; set; }
-        public virtual DbSet<BannedAccount> BannedAccount { get; set; }
-        public virtual DbSet<TestTable> TestTable { get; set; }
-        public virtual DbSet<TestTable2> TestTable2 { get; set; }
-        public virtual DbSet<TestTable3> TestTable3 { get; set; }
     }
 }

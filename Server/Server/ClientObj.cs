@@ -9,12 +9,12 @@ namespace Server
 {
     public class ClientObj
     {
-        TcpClient client;
-        DBController dBController;
-        public ClientObj(TcpClient tcpClient, DBController controller)
+        private TcpClient client;
+        private DBController dB;
+        public ClientObj(TcpClient tcpClient, DBController dB)
         {
             client = tcpClient;
-            dBController = controller;
+            this.dB = dB;
         }
 
         public void Process()
@@ -27,21 +27,18 @@ namespace Server
 
                 // получаем сообщение
                 StringBuilder builder = new StringBuilder();
-                int bytes = 0;
-                bytes = stream.Read(data, 0, data.Length);
+                int bytes = stream.Read(data, 0, data.Length);
                 builder.Append(Encoding.Unicode.GetString(data, 0, bytes));
-
-                string input = builder.ToString();
-                string retVal = dBController.RequestHandler(input);
-
-
+                // Запрос в БД
+                string answer = dB.HanldeUseRequest(builder.ToString());
                 // отправляем обратно сообщение
-                data = Encoding.Unicode.GetBytes(retVal);
+                data = Encoding.Unicode.GetBytes(answer);
 
                 stream.Write(data, 0, data.Length);
             }
             catch (Exception ex)
             {
+
                 Console.WriteLine(ex.Message);
             }
             finally

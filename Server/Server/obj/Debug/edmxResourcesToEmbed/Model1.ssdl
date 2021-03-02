@@ -50,17 +50,22 @@
     <Property Name="ProductName" Type="varchar" MaxLength="100" Nullable="false" />
     <Property Name="Price" Type="money" />
   </EntityType>
+  <!--Ошибки, обнаруженные при создании:
+предупреждение 6002: В таблице или представлении "TestDb.dbo.UserAccount" не определен первичный ключ. Ключ был выведен, а определение таблицы или представления было создано в режиме только для чтения.-->
   <EntityType Name="UserAccount">
     <Key>
       <PropertyRef Name="Id" />
+      <PropertyRef Name="Login" />
+      <PropertyRef Name="Password" />
+      <PropertyRef Name="Email" />
     </Key>
     <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-    <Property Name="Loign" Type="varchar" MaxLength="25" Nullable="false" />
-    <Property Name="Pass" Type="varchar" MaxLength="25" Nullable="false" />
-    <Property Name="Email" Type="varchar" MaxLength="35" Nullable="false" />
+    <Property Name="Login" Type="varchar" MaxLength="18" Nullable="false" />
+    <Property Name="Password" Type="varchar" MaxLength="18" Nullable="false" />
+    <Property Name="Email" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="IsAdmin" Type="bit" />
   </EntityType>
   <EntityContainer Name="Хранилище TestDbModelContainer">
-    <EntitySet Name="UserAccount" EntityType="Self.UserAccount" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="BannedAccount" EntityType="Self.BannedAccount" store:Type="Tables" store:Schema="dbo">
       <DefiningQuery>SELECT 
     [BannedAccount].[Id] AS [Id], 
@@ -90,6 +95,15 @@
     [TestTable3].[ProductName] AS [ProductName], 
     [TestTable3].[Price] AS [Price]
     FROM [dbo].[TestTable3] AS [TestTable3]</DefiningQuery>
+    </EntitySet>
+    <EntitySet Name="UserAccount" EntityType="Self.UserAccount" store:Type="Tables" store:Schema="dbo">
+      <DefiningQuery>SELECT 
+    [UserAccount].[Id] AS [Id], 
+    [UserAccount].[Login] AS [Login], 
+    [UserAccount].[Password] AS [Password], 
+    [UserAccount].[Email] AS [Email], 
+    [UserAccount].[IsAdmin] AS [IsAdmin]
+    FROM [dbo].[UserAccount] AS [UserAccount]</DefiningQuery>
     </EntitySet>
   </EntityContainer>
 </Schema>
