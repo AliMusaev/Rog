@@ -133,6 +133,6 @@ public class BattleController
     private RewardData GenerateReward()
     {
         RewardData retVal = new RewardData();
-        retVal.Exp = 
+        return null;
     }
 }
