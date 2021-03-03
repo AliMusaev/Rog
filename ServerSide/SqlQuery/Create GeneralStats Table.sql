@@ -1,0 +1,13 @@
+
+CREATE TABLE GeneralStats
+(	
+	UserId INT PRIMARY KEY,
+	Hp INT DEFAULT 10,
+	AP INT DEFAULT 10,
+	Dp INT DEFAULT 10,
+	Steps INT DEFAULT 30,
+	Gold INT DEFAULT 0,
+	FOREIGN KEY (UserId) REFERENCES dbo.[User] (UserId),
+
+
+)

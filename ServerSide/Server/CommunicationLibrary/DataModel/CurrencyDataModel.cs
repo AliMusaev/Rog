@@ -4,9 +4,10 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace CommunicationLibrary
+namespace CommunicationLibrary.DataModel
 {
-    public class Class1
+    class CurrencyDataModel
     {
+        public int Gold { get; set; }
     }
 }

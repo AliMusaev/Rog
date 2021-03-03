@@ -34,3 +34,15 @@ Z:\Projects\Games\Rog\Server\Server\obj\Debug\Server.csproj.CoreCompileInputs.ca
 Z:\Projects\Games\Rog\Server\Server\obj\Debug\Server.csproj.CopyComplete
 Z:\Projects\Games\Rog\Server\Server\obj\Debug\Server.exe
 Z:\Projects\Games\Rog\Server\Server\obj\Debug\Server.pdb
+D:\Projects\Rog\ServerSide\Server\Server\bin\Debug\Server.exe.config
+D:\Projects\Rog\ServerSide\Server\Server\bin\Debug\Server.exe
+D:\Projects\Rog\ServerSide\Server\Server\bin\Debug\Server.pdb
+D:\Projects\Rog\ServerSide\Server\Server\bin\Debug\EntityFramework.dll
+D:\Projects\Rog\ServerSide\Server\Server\bin\Debug\EntityFramework.SqlServer.dll
+D:\Projects\Rog\ServerSide\Server\Server\bin\Debug\EntityFramework.xml
+D:\Projects\Rog\ServerSide\Server\Server\bin\Debug\EntityFramework.SqlServer.xml
+D:\Projects\Rog\ServerSide\Server\Server\obj\Debug\Server.csprojAssemblyReference.cache
+D:\Projects\Rog\ServerSide\Server\Server\obj\Debug\Server.csproj.CoreCompileInputs.cache
+D:\Projects\Rog\ServerSide\Server\Server\obj\Debug\Server.csproj.CopyComplete
+D:\Projects\Rog\ServerSide\Server\Server\obj\Debug\Server.exe
+D:\Projects\Rog\ServerSide\Server\Server\obj\Debug\Server.pdb

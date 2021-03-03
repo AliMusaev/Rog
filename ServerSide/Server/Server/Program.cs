@@ -12,16 +12,17 @@ namespace Server
     class Program
     {
         const int port = 61555;
+        static IPAddress ip;
         static TcpListener listener;
         static void Main(string[] args)
         {
-
+            ip = IPAddress.Parse("127.0.0.1");
             while (true)
             {
                 try
                 {
                     DBController dB = new DBController();
-                    listener = new TcpListener(IPAddress.Parse("192.168.0.104"), port); //192.168.0.104
+                    listener = new TcpListener(ip, port);
                     listener.Start();
                     Console.WriteLine("Ожидание подключений...");
 

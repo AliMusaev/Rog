@@ -9,10 +9,10 @@ namespace Server
 {
     public class DBController
     {
-        private RogDBEntities2 context;
+        private RogDBEntities3 context;
         public DBController()
         {
-            context = new RogDBEntities2();
+            context = new RogDBEntities3();
         }
 
         public string HanldeUseRequest(string req)
@@ -27,17 +27,12 @@ namespace Server
         }
         private string RegistrationReq(List<string> req)
         {
-            string retVal = null;
-            UserAccount userAccount = new UserAccount();
-            userAccount.UserLogin = req[0];
-            userAccount.UserPassword = req[1];
-            userAccount.Email = req[2];
+            // 
+            var retVal = new System.Data.Entity.Core.Objects.ObjectParameter("responseMessage", typeof(string));
             try
             {
-                context.UserAccount.Add(userAccount);
-                context.SaveChanges();
-                retVal = $"User has been created";
-                Console.WriteLine($"User has been created");
+                // Call db procedure to create new user
+                context.uspAddUser(req[0], req[1], req[2], retVal);
             }
             catch (DbEntityValidationException ex)
             {
@@ -52,14 +47,17 @@ namespace Server
                     }
                 }
                 throw;
-                //Console.WriteLine(ex.Message);
-                //retVal = $"Error";
+            }
+            catch(Exception ex1)
+            {
+                Console.WriteLine(ex1);
             }
             finally
             {
-                
+
             }
-            return retVal;
+            // Return registration result
+            return Convert.ToString(retVal.Value);
         }
         private List<string> DecompileReq(string req)
         {

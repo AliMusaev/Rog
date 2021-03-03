@@ -1,109 +1,27 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<Schema Namespace="Хранилище TestDbModel" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
-  <!--Ошибки, обнаруженные при создании:
-предупреждение 6002: В таблице или представлении "TestDb.dbo.BannedAccount" не определен первичный ключ. Ключ был выведен, а определение таблицы или представления было создано в режиме только для чтения.-->
-  <EntityType Name="BannedAccount">
+<Schema Namespace="Хранилище RogDBModel1" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="User">
     <Key>
-      <PropertyRef Name="Id" />
-      <PropertyRef Name="Login" />
-      <PropertyRef Name="Email" />
-      <PropertyRef Name="Term" />
+      <PropertyRef Name="UserID" />
     </Key>
-    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-    <Property Name="Login" Type="varchar" MaxLength="18" Nullable="false" />
-    <Property Name="Email" Type="varchar" MaxLength="18" Nullable="false" />
-    <Property Name="Term" Type="date" Nullable="false" />
+    <Property Name="UserID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="LoginName" Type="nvarchar" MaxLength="40" Nullable="false" />
+    <Property Name="PasswordHash" Type="binary" MaxLength="64" Nullable="false" />
+    <Property Name="Salt" Type="uniqueidentifier" Nullable="false" />
+    <Property Name="Email" Type="nvarchar" MaxLength="40" />
   </EntityType>
-  <!--Ошибки, обнаруженные при создании:
-предупреждение 6002: В таблице или представлении "TestDb.dbo.TestTable" не определен первичный ключ. Ключ был выведен, а определение таблицы или представления было создано в режиме только для чтения.-->
-  <EntityType Name="TestTable">
-    <Key>
-      <PropertyRef Name="ProductId" />
-      <PropertyRef Name="CategoryId" />
-      <PropertyRef Name="ProductName" />
-    </Key>
-    <Property Name="ProductId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-    <Property Name="CategoryId" Type="int" Nullable="false" />
-    <Property Name="ProductName" Type="varchar" MaxLength="100" Nullable="false" />
-    <Property Name="Price" Type="money" />
-  </EntityType>
-  <!--Ошибки, обнаруженные при создании:
-предупреждение 6002: В таблице или представлении "TestDb.dbo.TestTable2" не определен первичный ключ. Ключ был выведен, а определение таблицы или представления было создано в режиме только для чтения.-->
-  <EntityType Name="TestTable2">
-    <Key>
-      <PropertyRef Name="CategoryId" />
-      <PropertyRef Name="CategoryName" />
-    </Key>
-    <Property Name="CategoryId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-    <Property Name="CategoryName" Type="varchar" MaxLength="100" Nullable="false" />
-  </EntityType>
-  <!--Ошибки, обнаруженные при создании:
-предупреждение 6002: В таблице или представлении "TestDb.dbo.TestTable3" не определен первичный ключ. Ключ был выведен, а определение таблицы или представления было создано в режиме только для чтения.-->
-  <EntityType Name="TestTable3">
-    <Key>
-      <PropertyRef Name="ProductId" />
-      <PropertyRef Name="CategoryId" />
-      <PropertyRef Name="ProductName" />
-    </Key>
-    <Property Name="ProductId" Type="int" Nullable="false" />
-    <Property Name="CategoryId" Type="int" Nullable="false" />
-    <Property Name="ProductName" Type="varchar" MaxLength="100" Nullable="false" />
-    <Property Name="Price" Type="money" />
-  </EntityType>
-  <!--Ошибки, обнаруженные при создании:
-предупреждение 6002: В таблице или представлении "TestDb.dbo.UserAccount" не определен первичный ключ. Ключ был выведен, а определение таблицы или представления было создано в режиме только для чтения.-->
-  <EntityType Name="UserAccount">
-    <Key>
-      <PropertyRef Name="Id" />
-      <PropertyRef Name="Login" />
-      <PropertyRef Name="Password" />
-      <PropertyRef Name="Email" />
-    </Key>
-    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-    <Property Name="Login" Type="varchar" MaxLength="18" Nullable="false" />
-    <Property Name="Password" Type="varchar" MaxLength="18" Nullable="false" />
-    <Property Name="Email" Type="varchar" MaxLength="50" Nullable="false" />
-    <Property Name="IsAdmin" Type="bit" />
-  </EntityType>
-  <EntityContainer Name="Хранилище TestDbModelContainer">
-    <EntitySet Name="BannedAccount" EntityType="Self.BannedAccount" store:Type="Tables" store:Schema="dbo">
-      <DefiningQuery>SELECT 
-    [BannedAccount].[Id] AS [Id], 
-    [BannedAccount].[Login] AS [Login], 
-    [BannedAccount].[Email] AS [Email], 
-    [BannedAccount].[Term] AS [Term]
-    FROM [dbo].[BannedAccount] AS [BannedAccount]</DefiningQuery>
-    </EntitySet>
-    <EntitySet Name="TestTable" EntityType="Self.TestTable" store:Type="Tables" store:Schema="dbo">
-      <DefiningQuery>SELECT 
-    [TestTable].[ProductId] AS [ProductId], 
-    [TestTable].[CategoryId] AS [CategoryId], 
-    [TestTable].[ProductName] AS [ProductName], 
-    [TestTable].[Price] AS [Price]
-    FROM [dbo].[TestTable] AS [TestTable]</DefiningQuery>
-    </EntitySet>
-    <EntitySet Name="TestTable2" EntityType="Self.TestTable2" store:Type="Tables" store:Schema="dbo">
-      <DefiningQuery>SELECT 
-    [TestTable2].[CategoryId] AS [CategoryId], 
-    [TestTable2].[CategoryName] AS [CategoryName]
-    FROM [dbo].[TestTable2] AS [TestTable2]</DefiningQuery>
-    </EntitySet>
-    <EntitySet Name="TestTable3" EntityType="Self.TestTable3" store:Type="Tables" store:Schema="dbo">
-      <DefiningQuery>SELECT 
-    [TestTable3].[ProductId] AS [ProductId], 
-    [TestTable3].[CategoryId] AS [CategoryId], 
-    [TestTable3].[ProductName] AS [ProductName], 
-    [TestTable3].[Price] AS [Price]
-    FROM [dbo].[TestTable3] AS [TestTable3]</DefiningQuery>
-    </EntitySet>
-    <EntitySet Name="UserAccount" EntityType="Self.UserAccount" store:Type="Tables" store:Schema="dbo">
-      <DefiningQuery>SELECT 
-    [UserAccount].[Id] AS [Id], 
-    [UserAccount].[Login] AS [Login], 
-    [UserAccount].[Password] AS [Password], 
-    [UserAccount].[Email] AS [Email], 
-    [UserAccount].[IsAdmin] AS [IsAdmin]
-    FROM [dbo].[UserAccount] AS [UserAccount]</DefiningQuery>
-    </EntitySet>
+  <Function Name="uspAddUser" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="pLogin" Type="nvarchar" Mode="In" />
+    <Parameter Name="pPassword" Type="nvarchar" Mode="In" />
+    <Parameter Name="pEmail" Type="nvarchar" Mode="In" />
+    <Parameter Name="responseMessage" Type="nvarchar(max)" Mode="InOut" />
+  </Function>
+  <Function Name="uspLogin" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="pLoginName" Type="nvarchar" Mode="In" />
+    <Parameter Name="pPassword" Type="nvarchar" Mode="In" />
+    <Parameter Name="responseMessage" Type="nvarchar" Mode="InOut" />
+  </Function>
+  <EntityContainer Name="Хранилище RogDBModel1Container">
+    <EntitySet Name="User" EntityType="Self.User" Schema="dbo" store:Type="Tables" />
   </EntityContainer>
 </Schema>

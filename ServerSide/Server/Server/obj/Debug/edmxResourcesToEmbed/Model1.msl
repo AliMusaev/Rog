@@ -1,54 +1,18 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
-  <EntityContainerMapping StorageEntityContainer="Хранилище TestDbModelContainer" CdmEntityContainer="TestDbEntities">
-    <EntitySetMapping Name="BannedAccount">
-      <EntityTypeMapping TypeName="TestDbModel.BannedAccount">
-        <MappingFragment StoreEntitySet="BannedAccount">
-          <ScalarProperty Name="Id" ColumnName="Id" />
-          <ScalarProperty Name="Login" ColumnName="Login" />
+  <EntityContainerMapping StorageEntityContainer="Хранилище RogDBModel1Container" CdmEntityContainer="RogDBEntities3">
+    <EntitySetMapping Name="User">
+      <EntityTypeMapping TypeName="RogDBModel1.User">
+        <MappingFragment StoreEntitySet="User">
+          <ScalarProperty Name="UserID" ColumnName="UserID" />
+          <ScalarProperty Name="LoginName" ColumnName="LoginName" />
+          <ScalarProperty Name="PasswordHash" ColumnName="PasswordHash" />
+          <ScalarProperty Name="Salt" ColumnName="Salt" />
           <ScalarProperty Name="Email" ColumnName="Email" />
-          <ScalarProperty Name="Term" ColumnName="Term" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
-    <EntitySetMapping Name="TestTable">
-      <EntityTypeMapping TypeName="TestDbModel.TestTable">
-        <MappingFragment StoreEntitySet="TestTable">
-          <ScalarProperty Name="ProductId" ColumnName="ProductId" />
-          <ScalarProperty Name="CategoryId" ColumnName="CategoryId" />
-          <ScalarProperty Name="ProductName" ColumnName="ProductName" />
-          <ScalarProperty Name="Price" ColumnName="Price" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
-    <EntitySetMapping Name="TestTable2">
-      <EntityTypeMapping TypeName="TestDbModel.TestTable2">
-        <MappingFragment StoreEntitySet="TestTable2">
-          <ScalarProperty Name="CategoryId" ColumnName="CategoryId" />
-          <ScalarProperty Name="CategoryName" ColumnName="CategoryName" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
-    <EntitySetMapping Name="TestTable3">
-      <EntityTypeMapping TypeName="TestDbModel.TestTable3">
-        <MappingFragment StoreEntitySet="TestTable3">
-          <ScalarProperty Name="ProductId" ColumnName="ProductId" />
-          <ScalarProperty Name="CategoryId" ColumnName="CategoryId" />
-          <ScalarProperty Name="ProductName" ColumnName="ProductName" />
-          <ScalarProperty Name="Price" ColumnName="Price" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
-    <EntitySetMapping Name="UserAccount">
-      <EntityTypeMapping TypeName="TestDbModel.UserAccount">
-        <MappingFragment StoreEntitySet="UserAccount">
-          <ScalarProperty Name="Id" ColumnName="Id" />
-          <ScalarProperty Name="Login" ColumnName="Login" />
-          <ScalarProperty Name="Password" ColumnName="Password" />
-          <ScalarProperty Name="Email" ColumnName="Email" />
-          <ScalarProperty Name="IsAdmin" ColumnName="IsAdmin" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
+    <FunctionImportMapping FunctionImportName="uspAddUser" FunctionName="Хранилище RogDBModel1.uspAddUser" />
+    <FunctionImportMapping FunctionImportName="uspLogin" FunctionName="Хранилище RogDBModel1.uspLogin" />
   </EntityContainerMapping>
 </Mapping>
