@@ -27,9 +27,10 @@ namespace Server
             throw new UnintentionalCodeFirstException();
         }
     
+        public virtual DbSet<GeneralStats> GeneralStats { get; set; }
         public virtual DbSet<User> User { get; set; }
     
-        public virtual int uspAddUser(string pLogin, string pPassword, string pEmail, ObjectParameter responseMessage)
+        public virtual int uspAddUser(string pLogin, string pPassword, string pEmail, ObjectParameter opResult, ObjectParameter responseMessage)
         {
             var pLoginParameter = pLogin != null ?
                 new ObjectParameter("pLogin", pLogin) :
@@ -43,10 +44,10 @@ namespace Server
                 new ObjectParameter("pEmail", pEmail) :
                 new ObjectParameter("pEmail", typeof(string));
     
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("uspAddUser", pLoginParameter, pPasswordParameter, pEmailParameter, responseMessage);
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("uspAddUser", pLoginParameter, pPasswordParameter, pEmailParameter, opResult, responseMessage);
         }
     
-        public virtual int uspLogin(string pLoginName, string pPassword, ObjectParameter responseMessage)
+        public virtual int uspLogin(string pLoginName, string pPassword, ObjectParameter responseMessage, ObjectParameter opResult)
         {
             var pLoginNameParameter = pLoginName != null ?
                 new ObjectParameter("pLoginName", pLoginName) :
@@ -56,7 +57,7 @@ namespace Server
                 new ObjectParameter("pPassword", pPassword) :
                 new ObjectParameter("pPassword", typeof(string));
     
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("uspLogin", pLoginNameParameter, pPasswordParameter, responseMessage);
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("uspLogin", pLoginNameParameter, pPasswordParameter, responseMessage, opResult);
         }
     }
 }

@@ -30,7 +30,7 @@ namespace Server
                 int bytes = stream.Read(data, 0, data.Length);
                 builder.Append(Encoding.Unicode.GetString(data, 0, bytes));
                 // Запрос в БД
-                string answer = dB.HanldeUseRequest(builder.ToString());
+                string answer = dB.HanldeUserRequest(builder.ToString());
                 // отправляем обратно сообщение
                 data = Encoding.Unicode.GetBytes(answer);
 

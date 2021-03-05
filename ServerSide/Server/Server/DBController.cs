@@ -15,7 +15,7 @@ namespace Server
             context = new RogDBEntities3();
         }
 
-        public string HanldeUseRequest(string req)
+        public string HanldeUserRequest(string req)
         {
             string retVal = null;
             if (req.StartsWith("regQ"))
@@ -28,11 +28,12 @@ namespace Server
         private string RegistrationReq(List<string> req)
         {
             // 
-            var retVal = new System.Data.Entity.Core.Objects.ObjectParameter("responseMessage", typeof(string));
+            var retMessage = new System.Data.Entity.Core.Objects.ObjectParameter("responseMessage", typeof(string));
+            var retVal = new System.Data.Entity.Core.Objects.ObjectParameter("opResult", typeof(bool));
             try
             {
                 // Call db procedure to create new user
-                context.uspAddUser(req[0], req[1], req[2], retVal);
+                context.uspAddUser(req[0], req[1], req[2], retVal, retMessage);
             }
             catch (DbEntityValidationException ex)
             {

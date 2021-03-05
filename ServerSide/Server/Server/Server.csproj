@@ -73,6 +73,9 @@
     <Compile Include="FormattedDbEntityValidationException.cs" />
     <Compile Include="ClientObj.cs" />
     <Compile Include="DBController.cs" />
+    <Compile Include="GeneralStats.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
     <Compile Include="Model1.Context.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>

@@ -5,7 +5,9 @@
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
       <Diagram DiagramId="b34ed75e4bb74d0d9c7f28c09df86c77" Name="Diagram1">
-        <EntityTypeShape EntityType="RogDBModel1.User" Width="1.5" PointX="0.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="RogDBModel1.GeneralStats" Width="1.5" PointX="3" PointY="1" />
+        <EntityTypeShape EntityType="RogDBModel1.User" Width="1.5" PointX="0.75" PointY="1" />
+        <AssociationConnector Association="RogDBModel1.FK__GeneralSt__UserI__7D439ABD" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

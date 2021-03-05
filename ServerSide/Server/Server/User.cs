@@ -19,5 +19,7 @@ namespace Server
         public byte[] PasswordHash { get; set; }
         public System.Guid Salt { get; set; }
         public string Email { get; set; }
+    
+        public virtual GeneralStats GeneralStats { get; set; }
     }
 }

@@ -12,21 +12,22 @@ namespace CommunicationLibrary
         private TcpClient client;
 
 
-        public string CreateNewAccRequest(string login, string password, string email)
+        public bool RegistrationRequest(string login, string password, string email, out string retMessage)
         {
-            string retVal = null ;
+            retMessage = null;
+            bool retVal = false;
             try
             {
                 NetworkStream stream = OpenStream();
                 
                 string request = $"regQ|{login}|{password}|{email}";
 
-                Communicate(request, stream);
+                retVal = Communicate(request, stream, out retMessage);
 
             }
             catch (Exception ex)
             {
-                retVal = ex.Message;
+                retMessage = ex.Message;
             }
             finally
             {
@@ -35,6 +36,33 @@ namespace CommunicationLibrary
             }
             return retVal;
         }
+        public bool LoginRequest(string login, string password, out string retMessage)
+        {
+            retMessage = null;
+            bool retVal = false;
+
+            try
+            {
+                NetworkStream stream = OpenStream();
+
+                string request = $"logQ|{login}|{password}";
+
+                retVal = Communicate(request, stream, out retMessage);
+            }
+            catch (Exception ex)
+            {
+                retMessage = ex.Message;
+            }
+            finally
+            {
+                if (client != null)
+                    client.Close();
+            }
+            return retVal;
+        }
+
+
+
         private NetworkStream OpenStream()
         {
             int port = 61555;
@@ -44,7 +72,7 @@ namespace CommunicationLibrary
             stream = client.GetStream();
             return stream;
         }
-        private string Communicate(string request, NetworkStream stream)
+        private bool Communicate(string request, NetworkStream stream, out string retMessage)
         {
             // SEND REQUEST
 
@@ -63,7 +91,22 @@ namespace CommunicationLibrary
             // read answer from server
             bytes = stream.Read(data, 0, data.Length);
             builder.Append(Encoding.Unicode.GetString(data, 0, bytes));
-            string retVal = builder.ToString();
+
+            bool retVal = false;
+            try
+            {
+                retVal = bool.Parse(builder.ToString());
+            }
+            catch (Exception ex)
+            {
+
+                retMessage = ex.Message;
+            }
+            finally
+            {
+                retMessage = builder.ToString();
+                retVal = false;
+            }
             return retVal;
         }
     }
