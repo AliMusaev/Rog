@@ -1,18 +1,30 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
   <EntityContainerMapping StorageEntityContainer="Хранилище RogDBModel1Container" CdmEntityContainer="RogDBEntities3">
-    <EntitySetMapping Name="User">
-      <EntityTypeMapping TypeName="RogDBModel1.User">
-        <MappingFragment StoreEntitySet="User">
-          <ScalarProperty Name="UserID" ColumnName="UserID" />
-          <ScalarProperty Name="LoginName" ColumnName="LoginName" />
-          <ScalarProperty Name="PasswordHash" ColumnName="PasswordHash" />
-          <ScalarProperty Name="Salt" ColumnName="Salt" />
-          <ScalarProperty Name="Email" ColumnName="Email" />
+    <FunctionImportMapping FunctionImportName="uspAddUser" FunctionName="Хранилище RogDBModel1.uspAddUser" />
+    <FunctionImportMapping FunctionImportName="uspLogin" FunctionName="Хранилище RogDBModel1.uspLogin" />
+    <EntitySetMapping Name="GeneralStats">
+      <EntityTypeMapping TypeName="RogDBModel1.GeneralStats">
+        <MappingFragment StoreEntitySet="GeneralStats">
+          <ScalarProperty Name="Gold" ColumnName="Gold" />
+          <ScalarProperty Name="Steps" ColumnName="Steps" />
+          <ScalarProperty Name="Dp" ColumnName="Dp" />
+          <ScalarProperty Name="AP" ColumnName="AP" />
+          <ScalarProperty Name="Hp" ColumnName="Hp" />
+          <ScalarProperty Name="UserId" ColumnName="UserId" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
-    <FunctionImportMapping FunctionImportName="uspAddUser" FunctionName="Хранилище RogDBModel1.uspAddUser" />
-    <FunctionImportMapping FunctionImportName="uspLogin" FunctionName="Хранилище RogDBModel1.uspLogin" />
+    <EntitySetMapping Name="User">
+      <EntityTypeMapping TypeName="RogDBModel1.User">
+        <MappingFragment StoreEntitySet="User">
+          <ScalarProperty Name="Email" ColumnName="Email" />
+          <ScalarProperty Name="Salt" ColumnName="Salt" />
+          <ScalarProperty Name="PasswordHash" ColumnName="PasswordHash" />
+          <ScalarProperty Name="LoginName" ColumnName="LoginName" />
+          <ScalarProperty Name="UserID" ColumnName="UserID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
   </EntityContainerMapping>
 </Mapping>

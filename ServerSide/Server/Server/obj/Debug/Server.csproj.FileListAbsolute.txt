@@ -46,3 +46,15 @@ D:\Projects\Rog\ServerSide\Server\Server\obj\Debug\Server.csproj.CoreCompileInpu
 D:\Projects\Rog\ServerSide\Server\Server\obj\Debug\Server.csproj.CopyComplete
 D:\Projects\Rog\ServerSide\Server\Server\obj\Debug\Server.exe
 D:\Projects\Rog\ServerSide\Server\Server\obj\Debug\Server.pdb
+Z:\Projects\Games\RogGame\ServerSide\Server\Server\bin\Debug\Server.exe.config
+Z:\Projects\Games\RogGame\ServerSide\Server\Server\bin\Debug\Server.exe
+Z:\Projects\Games\RogGame\ServerSide\Server\Server\bin\Debug\Server.pdb
+Z:\Projects\Games\RogGame\ServerSide\Server\Server\bin\Debug\EntityFramework.dll
+Z:\Projects\Games\RogGame\ServerSide\Server\Server\bin\Debug\EntityFramework.SqlServer.dll
+Z:\Projects\Games\RogGame\ServerSide\Server\Server\bin\Debug\EntityFramework.xml
+Z:\Projects\Games\RogGame\ServerSide\Server\Server\bin\Debug\EntityFramework.SqlServer.xml
+Z:\Projects\Games\RogGame\ServerSide\Server\Server\obj\Debug\Server.csprojAssemblyReference.cache
+Z:\Projects\Games\RogGame\ServerSide\Server\Server\obj\Debug\Server.csproj.CoreCompileInputs.cache
+Z:\Projects\Games\RogGame\ServerSide\Server\Server\obj\Debug\Server.csproj.CopyComplete
+Z:\Projects\Games\RogGame\ServerSide\Server\Server\obj\Debug\Server.exe
+Z:\Projects\Games\RogGame\ServerSide\Server\Server\obj\Debug\Server.pdb

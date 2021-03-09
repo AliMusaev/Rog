@@ -1,5 +1,16 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Schema Namespace="Хранилище RogDBModel1" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="GeneralStats">
+    <Key>
+      <PropertyRef Name="UserId" />
+    </Key>
+    <Property Name="UserId" Type="int" Nullable="false" />
+    <Property Name="Hp" Type="int" />
+    <Property Name="AP" Type="int" />
+    <Property Name="Dp" Type="int" />
+    <Property Name="Steps" Type="int" />
+    <Property Name="Gold" Type="int" />
+  </EntityType>
   <EntityType Name="User">
     <Key>
       <PropertyRef Name="UserID" />
@@ -10,18 +21,37 @@
     <Property Name="Salt" Type="uniqueidentifier" Nullable="false" />
     <Property Name="Email" Type="nvarchar" MaxLength="40" />
   </EntityType>
+  <Association Name="FK__GeneralSt__UserI__7D439ABD">
+    <End Role="User" Type="Self.User" Multiplicity="1" />
+    <End Role="GeneralStats" Type="Self.GeneralStats" Multiplicity="0..1" />
+    <ReferentialConstraint>
+      <Principal Role="User">
+        <PropertyRef Name="UserID" />
+      </Principal>
+      <Dependent Role="GeneralStats">
+        <PropertyRef Name="UserId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
   <Function Name="uspAddUser" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
     <Parameter Name="pLogin" Type="nvarchar" Mode="In" />
     <Parameter Name="pPassword" Type="nvarchar" Mode="In" />
     <Parameter Name="pEmail" Type="nvarchar" Mode="In" />
+    <Parameter Name="opResult" Type="bit" Mode="InOut" />
     <Parameter Name="responseMessage" Type="nvarchar(max)" Mode="InOut" />
   </Function>
   <Function Name="uspLogin" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
     <Parameter Name="pLoginName" Type="nvarchar" Mode="In" />
     <Parameter Name="pPassword" Type="nvarchar" Mode="In" />
     <Parameter Name="responseMessage" Type="nvarchar" Mode="InOut" />
+    <Parameter Name="opResult" Type="int" Mode="InOut" />
   </Function>
   <EntityContainer Name="Хранилище RogDBModel1Container">
+    <EntitySet Name="GeneralStats" EntityType="Self.GeneralStats" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="User" EntityType="Self.User" Schema="dbo" store:Type="Tables" />
+    <AssociationSet Name="FK__GeneralSt__UserI__7D439ABD" Association="Self.FK__GeneralSt__UserI__7D439ABD">
+      <End Role="User" EntitySet="User" />
+      <End Role="GeneralStats" EntitySet="GeneralStats" />
+    </AssociationSet>
   </EntityContainer>
 </Schema>

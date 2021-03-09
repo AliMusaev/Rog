@@ -28,12 +28,16 @@ public class LoginMenu : MonoBehaviour
     }
     private void TryToLogin()
     {
-        string servAnswer = communication.LoginRequest(_login.text, _password.text);
-        string erMessage
-        if (servAnswer = true)
+        string retMessage;
+        bool retVal = communication.LoginRequest(_login.text, _password.text, out retMessage);
+        
+        if (retVal)
         {
-
+            SceneManager.LoadScene("MainScene");
         }
-        SceneManager.LoadScene("MainScene");
+        else
+        {
+            _resutlText.text = retMessage;
+        }
     }
 }

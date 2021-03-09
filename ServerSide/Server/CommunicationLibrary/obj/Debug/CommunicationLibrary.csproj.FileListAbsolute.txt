@@ -4,3 +4,9 @@ D:\Projects\Rog\ServerSide\Server\CommunicationLibrary\obj\Debug\CommunicationLi
 D:\Projects\Rog\ServerSide\Server\CommunicationLibrary\obj\Debug\CommunicationLibrary.csproj.CoreCompileInputs.cache
 D:\Projects\Rog\ServerSide\Server\CommunicationLibrary\obj\Debug\CommunicationLibrary.dll
 D:\Projects\Rog\ServerSide\Server\CommunicationLibrary\obj\Debug\CommunicationLibrary.pdb
+Z:\Projects\Games\RogGame\ServerSide\Server\CommunicationLibrary\bin\Debug\CommunicationLibrary.dll
+Z:\Projects\Games\RogGame\ServerSide\Server\CommunicationLibrary\bin\Debug\CommunicationLibrary.pdb
+Z:\Projects\Games\RogGame\ServerSide\Server\CommunicationLibrary\obj\Debug\CommunicationLibrary.csprojAssemblyReference.cache
+Z:\Projects\Games\RogGame\ServerSide\Server\CommunicationLibrary\obj\Debug\CommunicationLibrary.csproj.CoreCompileInputs.cache
+Z:\Projects\Games\RogGame\ServerSide\Server\CommunicationLibrary\obj\Debug\CommunicationLibrary.dll
+Z:\Projects\Games\RogGame\ServerSide\Server\CommunicationLibrary\obj\Debug\CommunicationLibrary.pdb

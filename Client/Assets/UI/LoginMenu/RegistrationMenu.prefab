@@ -197,8 +197,8 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 2588883483605934281}
   m_TextComponent: {fileID: 4371557161204119268}
   m_Placeholder: {fileID: 2652192974990860627}
-  m_ContentType: 0
-  m_InputType: 0
+  m_ContentType: 7
+  m_InputType: 2
   m_AsteriskChar: 42
   m_KeyboardType: 0
   m_LineType: 0
@@ -295,7 +295,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Enter login
+  m_Text: Enter EMAIL
 --- !u!1 &2473805316427578873
 GameObject:
   m_ObjectHideFlags: 0
@@ -1023,8 +1023,8 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 3898623184242986452}
   m_TextComponent: {fileID: 9186761386260808956}
   m_Placeholder: {fileID: 8325911049793670889}
-  m_ContentType: 0
-  m_InputType: 0
+  m_ContentType: 7
+  m_InputType: 2
   m_AsteriskChar: 42
   m_KeyboardType: 0
   m_LineType: 0

@@ -23,6 +23,10 @@ namespace Server
                 retVal = RegistrationReq(DecompileReq(req));
 
             }
+            else if (req.StartsWith("logQ"))
+            {
+                retVal = LoginReq(DecompileReq(req));
+            }
             return retVal;
         }
         private string RegistrationReq(List<string> req)
@@ -58,6 +62,41 @@ namespace Server
 
             }
             // Return registration result
+            return Convert.ToString(retVal.Value);
+        }
+        private string LoginReq(List<string> req)
+        {
+            // 
+            var retMessage = new System.Data.Entity.Core.Objects.ObjectParameter("responseMessage", typeof(string));
+            var retVal = new System.Data.Entity.Core.Objects.ObjectParameter("opResult", typeof(bool));
+            try
+            {
+                // Call db procedure to create new user
+                context.uspLogin(req[0], req[1], retVal, retMessage);
+            }
+            catch (DbEntityValidationException ex)
+            {
+                foreach (var eve in ex.EntityValidationErrors)
+                {
+                    Console.WriteLine("Entity of type \"{0}\" in state \"{1}\" has the following validation errors:",
+                        eve.Entry.Entity.GetType().Name, eve.Entry.State);
+                    foreach (var ve in eve.ValidationErrors)
+                    {
+                        Console.WriteLine("- Property: \"{0}\", Error: \"{1}\"",
+                            ve.PropertyName, ve.ErrorMessage);
+                    }
+                }
+                throw;
+            }
+            catch (Exception ex1)
+            {
+                Console.WriteLine(ex1);
+            }
+            finally
+            {
+
+            }
+            // Return login result
             return Convert.ToString(retVal.Value);
         }
         private List<string> DecompileReq(string req)
