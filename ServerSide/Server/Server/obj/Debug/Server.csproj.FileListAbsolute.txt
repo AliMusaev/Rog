@@ -41,7 +41,6 @@ D:\Projects\Rog\ServerSide\Server\Server\bin\Debug\EntityFramework.dll
 D:\Projects\Rog\ServerSide\Server\Server\bin\Debug\EntityFramework.SqlServer.dll
 D:\Projects\Rog\ServerSide\Server\Server\bin\Debug\EntityFramework.xml
 D:\Projects\Rog\ServerSide\Server\Server\bin\Debug\EntityFramework.SqlServer.xml
-D:\Projects\Rog\ServerSide\Server\Server\obj\Debug\Server.csprojAssemblyReference.cache
 D:\Projects\Rog\ServerSide\Server\Server\obj\Debug\Server.csproj.CoreCompileInputs.cache
 D:\Projects\Rog\ServerSide\Server\Server\obj\Debug\Server.csproj.CopyComplete
 D:\Projects\Rog\ServerSide\Server\Server\obj\Debug\Server.exe
@@ -58,3 +57,4 @@ Z:\Projects\Games\RogGame\ServerSide\Server\Server\obj\Debug\Server.csproj.CoreC
 Z:\Projects\Games\RogGame\ServerSide\Server\Server\obj\Debug\Server.csproj.CopyComplete
 Z:\Projects\Games\RogGame\ServerSide\Server\Server\obj\Debug\Server.exe
 Z:\Projects\Games\RogGame\ServerSide\Server\Server\obj\Debug\Server.pdb
+D:\Projects\Rog\ServerSide\Server\Server\obj\Debug\Server.csprojAssemblyReference.cache

@@ -1,15 +1,134 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
-  <EntityContainerMapping StorageEntityContainer="Хранилище RogDBModelContainer" CdmEntityContainer="RogDBEntities2">
-    <EntitySetMapping Name="UserAccount">
-      <EntityTypeMapping TypeName="RogDBModel.UserAccount">
-        <MappingFragment StoreEntitySet="UserAccount">
-          <ScalarProperty Name="Id" ColumnName="Id" />
-          <ScalarProperty Name="UserLogin" ColumnName="UserLogin" />
-          <ScalarProperty Name="UserPassword" ColumnName="UserPassword" />
+  <EntityContainerMapping StorageEntityContainer="Хранилище RogDBModelContainer" CdmEntityContainer="RogDBEntities">
+    <EntitySetMapping Name="GeneralStats">
+      <EntityTypeMapping TypeName="RogDBModel.GeneralStats">
+        <MappingFragment StoreEntitySet="GeneralStats">
+          <ScalarProperty Name="UserId" ColumnName="UserId" />
+          <ScalarProperty Name="Exp" ColumnName="Exp" />
+          <ScalarProperty Name="ReqExp" ColumnName="ReqExp" />
+          <ScalarProperty Name="Lvl" ColumnName="Lvl" />
+          <ScalarProperty Name="Hp" ColumnName="Hp" />
+          <ScalarProperty Name="AP" ColumnName="AP" />
+          <ScalarProperty Name="Dp" ColumnName="Dp" />
+          <ScalarProperty Name="Steps" ColumnName="Steps" />
+          <ScalarProperty Name="Fp" ColumnName="Fp" />
+          <ScalarProperty Name="Gold" ColumnName="Gold" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="User">
+      <EntityTypeMapping TypeName="RogDBModel.User">
+        <MappingFragment StoreEntitySet="User">
+          <ScalarProperty Name="UserID" ColumnName="UserID" />
+          <ScalarProperty Name="LoginName" ColumnName="LoginName" />
+          <ScalarProperty Name="PasswordHash" ColumnName="PasswordHash" />
+          <ScalarProperty Name="Salt" ColumnName="Salt" />
           <ScalarProperty Name="Email" ColumnName="Email" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
+    <EntitySetMapping Name="UserAuthorizationLog">
+      <EntityTypeMapping TypeName="RogDBModel.UserAuthorizationLog">
+        <MappingFragment StoreEntitySet="UserAuthorizationLog">
+          <ScalarProperty Name="RowId" ColumnName="RowId" />
+          <ScalarProperty Name="UserLogin" ColumnName="UserLogin" />
+          <ScalarProperty Name="IpAdress" ColumnName="IpAdress" />
+          <ScalarProperty Name="DateTime" ColumnName="DateTime" />
+          <ScalarProperty Name="IsSuccess" ColumnName="IsSuccess" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="UserEquip">
+      <EntityTypeMapping TypeName="RogDBModel.UserEquip">
+        <MappingFragment StoreEntitySet="UserEquip">
+          <ScalarProperty Name="UserId" ColumnName="UserId" />
+          <ScalarProperty Name="WeaponId" ColumnName="WeaponId" />
+          <ScalarProperty Name="SecondWeaponId" ColumnName="SecondWeaponId" />
+          <ScalarProperty Name="HelmetId" ColumnName="HelmetId" />
+          <ScalarProperty Name="UpperId" ColumnName="UpperId" />
+          <ScalarProperty Name="LowerId" ColumnName="LowerId" />
+          <ScalarProperty Name="GlovesId" ColumnName="GlovesId" />
+          <ScalarProperty Name="ShoesId" ColumnName="ShoesId" />
+          <ScalarProperty Name="Ring1Id" ColumnName="Ring1Id" />
+          <ScalarProperty Name="Ring2Id" ColumnName="Ring2Id" />
+          <ScalarProperty Name="Earring1Id" ColumnName="Earring1Id" />
+          <ScalarProperty Name="Earring2Id" ColumnName="Earring2Id" />
+          <ScalarProperty Name="AmuletId" ColumnName="AmuletId" />
+          <ScalarProperty Name="BeltId" ColumnName="BeltId" />
+          <ScalarProperty Name="CloakId" ColumnName="CloakId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="UserInventory">
+      <EntityTypeMapping TypeName="RogDBModel.UserInventory">
+        <MappingFragment StoreEntitySet="UserInventory">
+          <ScalarProperty Name="ItemCId" ColumnName="ItemCId" />
+          <ScalarProperty Name="UserId" ColumnName="UserId" />
+          <ScalarProperty Name="ItemTypeId" ColumnName="ItemTypeId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="UserRegistrationLog">
+      <EntityTypeMapping TypeName="RogDBModel.UserRegistrationLog">
+        <MappingFragment StoreEntitySet="UserRegistrationLog">
+          <ScalarProperty Name="RowId" ColumnName="RowId" />
+          <ScalarProperty Name="UserLogin" ColumnName="UserLogin" />
+          <ScalarProperty Name="IpAdress" ColumnName="IpAdress" />
+          <ScalarProperty Name="DateTime" ColumnName="DateTime" />
+          <ScalarProperty Name="IsSuccess" ColumnName="IsSuccess" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <FunctionImportMapping FunctionImportName="InsertToLog" FunctionName="Хранилище RogDBModel.InsertToLog" />
+    <FunctionImportMapping FunctionImportName="uspAddUser" FunctionName="Хранилище RogDBModel.uspAddUser" />
+    <FunctionImportMapping FunctionImportName="uspLogin" FunctionName="Хранилище RogDBModel.uspLogin" />
+    <EntitySetMapping Name="sysdiagrams">
+      <EntityTypeMapping TypeName="RogDBModel.sysdiagrams">
+        <MappingFragment StoreEntitySet="sysdiagrams">
+          <ScalarProperty Name="definition" ColumnName="definition" />
+          <ScalarProperty Name="version" ColumnName="version" />
+          <ScalarProperty Name="diagram_id" ColumnName="diagram_id" />
+          <ScalarProperty Name="principal_id" ColumnName="principal_id" />
+          <ScalarProperty Name="name" ColumnName="name" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="TransactionLog">
+      <EntityTypeMapping TypeName="RogDBModel.TransactionLog">
+        <MappingFragment StoreEntitySet="TransactionLog">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="TransType" ColumnName="TransType" />
+          <ScalarProperty Name="IpAdress" ColumnName="IpAdress" />
+          <ScalarProperty Name="TransId" ColumnName="TransId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <FunctionImportMapping FunctionImportName="AddTransLog" FunctionName="Хранилище RogDBModel.AddTransLog" />
+    <FunctionImportMapping FunctionImportName="sp_alterdiagram" FunctionName="Хранилище RogDBModel.sp_alterdiagram" />
+    <FunctionImportMapping FunctionImportName="sp_creatediagram" FunctionName="Хранилище RogDBModel.sp_creatediagram" />
+    <FunctionImportMapping FunctionImportName="sp_dropdiagram" FunctionName="Хранилище RogDBModel.sp_dropdiagram" />
+    <FunctionImportMapping FunctionImportName="sp_helpdiagramdefinition" FunctionName="Хранилище RogDBModel.sp_helpdiagramdefinition">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="RogDBModel.sp_helpdiagramdefinition_Result">
+          <ScalarProperty Name="version" ColumnName="version" />
+          <ScalarProperty Name="definition" ColumnName="definition" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="sp_helpdiagrams" FunctionName="Хранилище RogDBModel.sp_helpdiagrams">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="RogDBModel.sp_helpdiagrams_Result">
+          <ScalarProperty Name="Database" ColumnName="Database" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="ID" ColumnName="ID" />
+          <ScalarProperty Name="Owner" ColumnName="Owner" />
+          <ScalarProperty Name="OwnerID" ColumnName="OwnerID" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="sp_renamediagram" FunctionName="Хранилище RogDBModel.sp_renamediagram" />
+    <FunctionImportMapping FunctionImportName="sp_upgraddiagrams" FunctionName="Хранилище RogDBModel.sp_upgraddiagrams" />
+    <FunctionImportMapping FunctionImportName="UpdateUserGold" FunctionName="Хранилище RogDBModel.UpdateUserGold" />
   </EntityContainerMapping>
 </Mapping>

@@ -244,8 +244,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d23b497b1f8417047978c949d32ba074, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _login: {fileID: 8323258611426268816}
-  _password: {fileID: 8323258610736895353}
+  _login: {fileID: 8323258610850306652}
+  _password: {fileID: 8323258611591958567}
   _resutlText: {fileID: 1383016014068338327}
   _loginButton: {fileID: 8323258612014585380}
   _regButton: {fileID: 8323258611752182668}

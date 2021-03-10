@@ -4,8 +4,18 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="aa287d5a043448cd93b984f33dde5a8a" Name="Diagram1">
-        <EntityTypeShape EntityType="RogDBModel.UserAccount" Width="1.5" PointX="0.75" PointY="0.75" IsExpanded="true" />
+      <Diagram DiagramId="8e0013963a234ef28ea12b1f312afe3e" Name="Diagram1">
+        <EntityTypeShape EntityType="RogDBModel.GeneralStats" Width="1.5" PointX="3" PointY="1.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="RogDBModel.User" Width="1.5" PointX="0.75" PointY="5.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="RogDBModel.UserAuthorizationLog" Width="1.5" PointX="5.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="RogDBModel.UserEquip" Width="1.5" PointX="3" PointY="5.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="RogDBModel.UserInventory" Width="1.5" PointX="3" PointY="10.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="RogDBModel.UserRegistrationLog" Width="1.5" PointX="5.75" PointY="3.75" IsExpanded="true" />
+        <AssociationConnector Association="RogDBModel.FK__GeneralSt__UserI__2739D489" ManuallyRouted="false" />
+        <AssociationConnector Association="RogDBModel.FK__UserEquip__UserI__2A164134" ManuallyRouted="false" />
+        <AssociationConnector Association="RogDBModel.FK__UserInven__UserI__0D7A0286" ManuallyRouted="false" />
+        <EntityTypeShape EntityType="RogDBModel.sysdiagrams" Width="1.5" PointX="5.375" PointY="6.75" />
+        <EntityTypeShape EntityType="RogDBModel.TransactionLog" Width="1.5" PointX="7.375" PointY="6.75" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

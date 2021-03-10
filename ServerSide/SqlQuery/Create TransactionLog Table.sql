@@ -1,0 +1,5 @@
+CREATE TABLE dbo.TransactionLog
+(
+	TransId NVARCHAR(255) PRIMARY KEY NOT NULL,
+	IpAdress NVARCHAR(50)  NOT NULL,
+)

@@ -44,6 +44,7 @@
     <Compile Include="Communication.cs" />
     <Compile Include="DataModel\CurrencyDataModel.cs" />
     <Compile Include="DataModel\ExpDataModel.cs" />
+    <Compile Include="MsgCodeInterpretator.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

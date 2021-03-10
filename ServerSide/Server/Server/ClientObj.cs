@@ -10,8 +10,8 @@ namespace Server
     public class ClientObj
     {
         private TcpClient client;
-        private DBController dB;
-        public ClientObj(TcpClient tcpClient, DBController dB)
+        private GeneralRequestHandler dB;
+        public ClientObj(TcpClient tcpClient, GeneralRequestHandler dB)
         {
             client = tcpClient;
             this.dB = dB;
@@ -23,14 +23,14 @@ namespace Server
             try
             {
                 stream = client.GetStream();
-                byte[] data = new byte[64]; // буфер для получаемых данных
-
+                byte[] data = new byte[255]; // буфер для получаемых данных
+                string MYIpClient = Convert.ToString(((System.Net.IPEndPoint)client.Client.RemoteEndPoint).Address);
                 // получаем сообщение
                 StringBuilder builder = new StringBuilder();
                 int bytes = stream.Read(data, 0, data.Length);
                 builder.Append(Encoding.Unicode.GetString(data, 0, bytes));
                 // Запрос в БД
-                string answer = dB.HanldeUserRequest(builder.ToString());
+                string answer = dB.HanldeRequest(builder.ToString(), MYIpClient);
                 // отправляем обратно сообщение
                 data = Encoding.Unicode.GetBytes(answer);
 

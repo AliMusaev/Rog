@@ -6617,10 +6617,10 @@ RectTransform:
   m_Father: {fileID: 1907403565}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 0, y: 160}
+  m_AnchorMin: {x: 0, y: 1}
+  m_AnchorMax: {x: 0, y: 1}
+  m_AnchoredPosition: {x: 510, y: -260}
+  m_SizeDelta: {x: 1020, y: 160}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &383639800
 MonoBehaviour:
@@ -10154,10 +10154,10 @@ RectTransform:
   m_Father: {fileID: 1907403565}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 0, y: 160}
+  m_AnchorMin: {x: 0, y: 1}
+  m_AnchorMax: {x: 0, y: 1}
+  m_AnchoredPosition: {x: 510, y: -80}
+  m_SizeDelta: {x: 1020, y: 160}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &687056158
 MonoBehaviour:
@@ -20507,10 +20507,10 @@ RectTransform:
   m_Father: {fileID: 1907403565}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 0, y: 160}
+  m_AnchorMin: {x: 0, y: 1}
+  m_AnchorMax: {x: 0, y: 1}
+  m_AnchoredPosition: {x: 510, y: -440}
+  m_SizeDelta: {x: 1020, y: 160}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1389609071
 MonoBehaviour:
@@ -22073,6 +22073,7 @@ GameObject:
   - component: {fileID: 1469525640}
   - component: {fileID: 1469525642}
   - component: {fileID: 1469525643}
+  - component: {fileID: 1469525641}
   m_Layer: 5
   m_Name: HUD
   m_TagString: Untagged
@@ -22105,6 +22106,21 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &1469525641
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1469525639}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d1edf23d4d8d33d4488f5c1477034de1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  StatsMenuButton: {fileID: 1253167808}
+  InventoryMenuButton: {fileID: 0}
+  SettingsMenuButton: {fileID: 0}
 --- !u!114 &1469525642
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -26723,7 +26739,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1717637939
 RectTransform:
   m_ObjectHideFlags: 0

@@ -6,8 +6,8 @@ using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 public class LoginMenu : MonoBehaviour
 {
-    [SerializeField] private Text _login;
-    [SerializeField] private Text _password;
+    [SerializeField] private InputField _login;
+    [SerializeField] private InputField _password;
     [SerializeField] private Text _resutlText;
     [SerializeField] private Button _loginButton;
     [SerializeField] private Button _regButton;
@@ -28,16 +28,16 @@ public class LoginMenu : MonoBehaviour
     }
     private void TryToLogin()
     {
-        string retMessage;
-        bool retVal = communication.LoginRequest(_login.text, _password.text, out retMessage);
+        int retMessage;
+        string retVal = communication.LoginRequest(_login.text, _password.text, out retMessage);
         
-        if (retVal)
+        if (retMessage != -1)
         {
             SceneManager.LoadScene("MainScene");
         }
         else
         {
-            _resutlText.text = retMessage;
+            _resutlText.text = retVal;
         }
     }
 }

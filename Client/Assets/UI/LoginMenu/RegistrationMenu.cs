@@ -8,10 +8,10 @@ using UnityEngine.UI;
 using CommunicationLibrary;
 public class RegistrationMenu : MonoBehaviour
 {
-    [SerializeField] private Text _login;
-    [SerializeField] private Text _password;
-    [SerializeField] private Text _confirmPassword;
-    [SerializeField] private Text _email;
+    [SerializeField] private InputField _login;
+    [SerializeField] private InputField _password;
+    [SerializeField] private InputField _confirmPassword;
+    [SerializeField] private InputField _email;
     [SerializeField] private Text _resutlText;
     [SerializeField] private Button _regButton;
     [SerializeField] private Button _backButton;

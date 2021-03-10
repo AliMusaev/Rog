@@ -10,20 +10,28 @@ namespace CommunicationLibrary
     public class Communication
     {
         private TcpClient client;
+        private MsgCodeInterpretator msgInterpretator;
 
+        public Communication()
+        {
+            msgInterpretator = new MsgCodeInterpretator();
+        }
 
         public bool RegistrationRequest(string login, string password, string email, out string retMessage)
         {
-            retMessage = null;
+            
             bool retVal = false;
             try
             {
                 NetworkStream stream = OpenStream();
                 
-                string request = $"regQ|{login}|{password}|{email}";
+                string request = $"regQ|{login}+{DateTime.Now}|{login}|{password}|{email}";
 
-                retVal = Communicate(request, stream, out retMessage);
+                string answer = Communicate(request, stream);
 
+                List<string> decompileAnswer = DecompileAnswer(answer);
+
+                retVal = msgInterpretator.GetResultInformation(decompileAnswer[0], out retMessage);
             }
             catch (Exception ex)
             {
@@ -34,24 +42,66 @@ namespace CommunicationLibrary
                 if (client != null)
                     client.Close();
             }
+
             return retVal;
         }
-        public bool LoginRequest(string login, string password, out string retMessage)
+        public bool GoldUpdate(string key, int id, int gold, out string retMessage)
         {
-            retMessage = null;
+
             bool retVal = false;
+            try
+            {
+                NetworkStream stream = OpenStream();
+
+                string request = $"golQ|{key}|{id}|{gold}";
+
+                string answer = Communicate(request, stream);
+
+                List<string> decompileAnswer = DecompileAnswer(answer);
+
+                retVal = msgInterpretator.GetResultInformation(decompileAnswer[0], out retMessage);
+            }
+            catch (Exception ex)
+            {
+                retMessage = ex.Message;
+            }
+            finally
+            {
+                if (client != null)
+                    client.Close();
+            }
+
+            return retVal;
+        }
+        public string LoginRequest(string login, string password, out int userId)
+        {
+            string retVal = null;
 
             try
             {
                 NetworkStream stream = OpenStream();
 
-                string request = $"logQ|{login}|{password}";
+                string request = $"logQ|{login}+{DateTime.Now}|{login}|{password}";
 
-                retVal = Communicate(request, stream, out retMessage);
+                string answer = Communicate(request, stream);
+
+                List<string> decompileAnswer = DecompileAnswer(answer);
+
+                bool opResult = msgInterpretator.GetResultInformation(decompileAnswer[0], out retVal);
+
+                if (opResult)
+                {
+                    int.TryParse(decompileAnswer[1], out userId);
+                }
+                else
+                {
+                    userId = -1;
+                }
             }
             catch (Exception ex)
             {
-                retMessage = ex.Message;
+                retVal = ex.Message;
+                userId = -1;
             }
             finally
             {
@@ -72,7 +122,7 @@ namespace CommunicationLibrary
             stream = client.GetStream();
             return stream;
         }
-        private bool Communicate(string request, NetworkStream stream, out string retMessage)
+        private string Communicate(string request, NetworkStream stream)
         {
             // SEND REQUEST
 
@@ -84,29 +134,21 @@ namespace CommunicationLibrary
             // RECIVE ANSWER
 
             // Data buffer
-            data = new byte[64];
+            data = new byte[255];
             StringBuilder builder = new StringBuilder();
             // data length
             int bytes = 0;
             // read answer from server
             bytes = stream.Read(data, 0, data.Length);
             builder.Append(Encoding.Unicode.GetString(data, 0, bytes));
-
-            bool retVal = false;
-            try
-            {
-                retVal = bool.Parse(builder.ToString());
-            }
-            catch (Exception ex)
-            {
-
-                retMessage = ex.Message;
-            }
-            finally
-            {
-                retMessage = builder.ToString();
-                retVal = false;
-            }
+            return builder.ToString();
+        }
+        private List<string> DecompileAnswer(string message)
+        {
+            // Parse user request and create new list
+            List<string> retVal = new List<string>(message.Split('|'));
+            // Remove request identificator
+            retVal.Remove(retVal[0]);
             return retVal;
         }
     }

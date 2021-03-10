@@ -5,13 +5,13 @@ using UnityEngine;
 
 class PlayerDataController : IMainStats, IExp, IZoneData, IGauge, IInventory, IEquipCells
 {
-    private MainStatsData mainStats;
+    private MainStatsData mainStats; // 
     private StatsData itemsStats;
-    private ExpData expData;
+    private ExpData expData; 
     private ZoneData zoneData;
     private GaugeData positionData;
-    private InventoryData inventoryData;
-    private EquipCellsData equipCellsData;
+    private InventoryData inventoryData; //
+    private EquipCellsData equipCellsData; //
     public PlayerDataController()
     {
         mainStats = new MainStatsData();
