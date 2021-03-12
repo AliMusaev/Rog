@@ -19,5 +19,7 @@ namespace Server
         public string IpAdress { get; set; }
         public Nullable<System.DateTime> DateTime { get; set; }
         public bool IsSuccess { get; set; }
+        public byte OpResult { get; set; }
+        public string Message { get; set; }
     }
 }

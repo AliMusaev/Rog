@@ -11,32 +11,22 @@ namespace Server.Core
     class Registration
     {
         private readonly object __lockObj = new object();
-        private MessageConverter converter;
         private RogDBEntities context;
         public Registration(RogDBEntities context)
         {
             this.context = context;
-            converter = new MessageConverter();
         }
-        public string Register(string input, string userIp)
+        public byte Register(List<string> reqFields, string userIp)
         {
-            // method result value
-            string compiledAnswer = null;
             // Returned values from DB. responseMessage - error message else empty, opResult - result code (looks in ResultsCodeTable)
-            var retMessage = new ObjectParameter("responseMessage", typeof(string));
             var opResult = new ObjectParameter("opResult", typeof(byte));
 
-            List<string> reqFields = converter.DecompileReq(input);
-            byte isUniqueOp = AddNewTransaction(reqFields[0], reqFields[1], userIp);
-            // If request already added into table then skip further handle
-            if (isUniqueOp == 0)
-            {
                 try
                 {
                     // Call db procedure to create new user
                     lock (__lockObj)
                     {
-                        context.uspAddUser(reqFields[0], reqFields[1], reqFields[2], userIp, opResult, retMessage);
+                        context.uspAddUser(reqFields[2], reqFields[3], reqFields[4], userIp, opResult);
                     }
                 }
                 catch (DbEntityValidationException ex)
@@ -57,27 +47,8 @@ namespace Server.Core
                 {
                     Console.WriteLine(ex1);
                 }
-                // When registration return err message 
-                if (retMessage.Value.ToString().Length > 0)
-                {
-                    Console.WriteLine(retMessage.Value.ToString());
-                }
-                
-                compiledAnswer = converter.CompileAnswer("RegA", (byte)opResult.Value);
-            }
-            else
-            {
-                compiledAnswer = converter.CompileAnswer("RegA", isUniqueOp);
-            }
-            // Return registration result
-            return compiledAnswer;
+            return (byte)opResult.Value;
 
-        }
-        private byte AddNewTransaction(string transType, string transId, string userIp)
-        {
-            var retValue = new ObjectParameter("opResult", typeof(byte));
-            context.AddTransLog(transType, transId, userIp, retValue);
-            return (byte)retValue.Value;
         }
     }
 }

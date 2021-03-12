@@ -32,12 +32,12 @@
         </EntityType>
         <EntityType Name="TransactionLog">
           <Key>
-            <PropertyRef Name="TransId" />
+            <PropertyRef Name="TimeStamp" />
           </Key>
           <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="TransId" Type="nvarchar" MaxLength="255" Nullable="false" />
           <Property Name="TransType" Type="nvarchar" MaxLength="10" Nullable="false" />
-          <Property Name="IpAdress" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="TimeStamp" Type="nvarchar" MaxLength="30" Nullable="false" />
+          <Property Name="UserIp" Type="nvarchar" MaxLength="30" Nullable="false" />
         </EntityType>
         <EntityType Name="User">
           <Key>
@@ -54,10 +54,11 @@
             <PropertyRef Name="RowId" />
           </Key>
           <Property Name="RowId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="UserLogin" Type="nvarchar" MaxLength="90" Nullable="false" />
-          <Property Name="IpAdress" Type="nvarchar" MaxLength="90" Nullable="false" />
+          <Property Name="UserLogin" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="IpAdress" Type="nvarchar" MaxLength="50" Nullable="false" />
           <Property Name="DateTime" Type="datetime" />
-          <Property Name="IsSuccess" Type="bit" Nullable="false" />
+          <Property Name="OpResult" Type="tinyint" Nullable="false" />
+          <Property Name="Message" Type="nvarchar(max)" Nullable="false" />
         </EntityType>
         <EntityType Name="UserEquip">
           <Key>
@@ -92,10 +93,11 @@
             <PropertyRef Name="RowId" />
           </Key>
           <Property Name="RowId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="UserLogin" Type="nvarchar" MaxLength="90" Nullable="false" />
-          <Property Name="IpAdress" Type="nvarchar" MaxLength="90" Nullable="false" />
+          <Property Name="UserLogin" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="IpAdress" Type="nvarchar" MaxLength="50" Nullable="false" />
           <Property Name="DateTime" Type="datetime" />
-          <Property Name="IsSuccess" Type="bit" Nullable="false" />
+          <Property Name="OpResult" Type="tinyint" Nullable="false" />
+          <Property Name="Message" Type="nvarchar(max)" Nullable="false" />
         </EntityType>
         <Association Name="FK__GeneralSt__UserI__2739D489">
           <End Role="User" Type="Self.User" Multiplicity="1" />
@@ -135,7 +137,7 @@
         </Association>
         <Function Name="AddTransLog" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="transType" Type="nvarchar" Mode="In" />
-          <Parameter Name="transId" Type="nvarchar" Mode="In" />
+          <Parameter Name="timeStamp" Type="nvarchar" Mode="In" />
           <Parameter Name="userIp" Type="nvarchar" Mode="In" />
           <Parameter Name="opResult" Type="tinyint" Mode="InOut" />
         </Function>
@@ -144,7 +146,8 @@
           <Parameter Name="InRegTable" Type="bit" Mode="In" />
           <Parameter Name="UserLogin" Type="nvarchar" Mode="In" />
           <Parameter Name="IpAdress" Type="nvarchar" Mode="In" />
-          <Parameter Name="IsSuccess" Type="bit" Mode="In" />
+          <Parameter Name="opResult" Type="tinyint" Mode="In" />
+          <Parameter Name="Message" Type="nvarchar(max)" Mode="In" />
         </Function>
         <Function Name="sp_alterdiagram" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
@@ -179,6 +182,7 @@
         <Function Name="UpdateUserGold" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="userId" Type="int" Mode="In" />
           <Parameter Name="addedGold" Type="int" Mode="In" />
+          <Parameter Name="NewValue" Type="int" Mode="InOut" />
           <Parameter Name="opResult" Type="tinyint" Mode="InOut" />
         </Function>
         <Function Name="uspAddUser" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
@@ -187,7 +191,6 @@
           <Parameter Name="pEmail" Type="nvarchar" Mode="In" />
           <Parameter Name="pIp" Type="nvarchar" Mode="In" />
           <Parameter Name="opResult" Type="tinyint" Mode="InOut" />
-          <Parameter Name="responseMessage" Type="nvarchar(max)" Mode="InOut" />
         </Function>
         <Function Name="uspLogin" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="pLoginName" Type="nvarchar" Mode="In" />
@@ -256,10 +259,12 @@
             <PropertyRef Name="RowId" />
           </Key>
           <Property Name="RowId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="UserLogin" Type="String" MaxLength="90" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="IpAdress" Type="String" MaxLength="90" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="UserLogin" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="IpAdress" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="DateTime" Type="DateTime" Precision="3" />
           <Property Name="IsSuccess" Type="Boolean" Nullable="false" />
+          <Property Name="OpResult" Type="Byte" Nullable="false" />
+          <Property Name="Message" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
         </EntityType>
         <EntityType Name="UserEquip">
           <Key>
@@ -296,10 +301,12 @@
             <PropertyRef Name="RowId" />
           </Key>
           <Property Name="RowId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="UserLogin" Type="String" MaxLength="90" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="IpAdress" Type="String" MaxLength="90" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="UserLogin" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="IpAdress" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="DateTime" Type="DateTime" Precision="3" />
           <Property Name="IsSuccess" Type="Boolean" Nullable="false" />
+          <Property Name="OpResult" Type="Byte" Nullable="false" />
+          <Property Name="Message" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
         </EntityType>
         <Association Name="FK__GeneralSt__UserI__2739D489">
           <End Role="User" Type="Self.User" Multiplicity="1" />
@@ -360,7 +367,8 @@
             <Parameter Name="InRegTable" Mode="In" Type="Boolean" />
             <Parameter Name="UserLogin" Mode="In" Type="String" />
             <Parameter Name="IpAdress" Mode="In" Type="String" />
-            <Parameter Name="IsSuccess" Mode="In" Type="Boolean" />
+            <Parameter Name="opResult" Mode="In" Type="Byte" />
+            <Parameter Name="Message" Mode="In" Type="String" />
           </FunctionImport>
           <FunctionImport Name="uspAddUser">
             <Parameter Name="pLogin" Mode="In" Type="String" />
@@ -368,7 +376,6 @@
             <Parameter Name="pEmail" Mode="In" Type="String" />
             <Parameter Name="pIp" Mode="In" Type="String" />
             <Parameter Name="opResult" Mode="InOut" Type="Byte" />
-            <Parameter Name="responseMessage" Mode="InOut" Type="String" />
           </FunctionImport>
           <FunctionImport Name="uspLogin">
             <Parameter Name="pLoginName" Mode="In" Type="String" />
@@ -381,7 +388,7 @@
           <EntitySet Name="TransactionLog" EntityType="RogDBModel.TransactionLog" />
           <FunctionImport Name="AddTransLog">
             <Parameter Name="transType" Mode="In" Type="String" />
-            <Parameter Name="transId" Mode="In" Type="String" />
+            <Parameter Name="timeStamp" Mode="In" Type="String" />
             <Parameter Name="userIp" Mode="In" Type="String" />
             <Parameter Name="opResult" Mode="InOut" Type="Byte" />
           </FunctionImport>
@@ -418,6 +425,7 @@
           <FunctionImport Name="UpdateUserGold">
             <Parameter Name="userId" Mode="In" Type="Int32" />
             <Parameter Name="addedGold" Mode="In" Type="Int32" />
+            <Parameter Name="NewValue" Mode="InOut" Type="Int32" />
             <Parameter Name="opResult" Mode="InOut" Type="Byte" />
           </FunctionImport>
         </EntityContainer>
@@ -434,11 +442,15 @@
         <EntityType Name="TransactionLog">
           <Key>
             <PropertyRef Name="TransId" />
+            <PropertyRef Name="TimeStamp" />
           </Key>
           <Property Name="TransId" Type="String" Nullable="false" MaxLength="255" FixedLength="false" Unicode="true" />
           <Property Name="IpAdress" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="TransType" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="true" />
           <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Message" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="TimeStamp" Type="String" Nullable="false" MaxLength="30" FixedLength="false" Unicode="true" />
+          <Property Name="UserIp" Type="String" Nullable="false" MaxLength="30" FixedLength="false" Unicode="true" />
         </EntityType>
         <ComplexType Name="sp_helpdiagramdefinition_Result">
           <Property Type="Int32" Name="version" Nullable="true" />
@@ -487,11 +499,12 @@
           <EntitySetMapping Name="UserAuthorizationLog">
             <EntityTypeMapping TypeName="RogDBModel.UserAuthorizationLog">
               <MappingFragment StoreEntitySet="UserAuthorizationLog">
+                <ScalarProperty Name="Message" ColumnName="Message" />
+                <ScalarProperty Name="OpResult" ColumnName="OpResult" />
                 <ScalarProperty Name="RowId" ColumnName="RowId" />
                 <ScalarProperty Name="UserLogin" ColumnName="UserLogin" />
                 <ScalarProperty Name="IpAdress" ColumnName="IpAdress" />
                 <ScalarProperty Name="DateTime" ColumnName="DateTime" />
-                <ScalarProperty Name="IsSuccess" ColumnName="IsSuccess" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -528,11 +541,12 @@
           <EntitySetMapping Name="UserRegistrationLog">
             <EntityTypeMapping TypeName="RogDBModel.UserRegistrationLog">
               <MappingFragment StoreEntitySet="UserRegistrationLog">
+                <ScalarProperty Name="Message" ColumnName="Message" />
+                <ScalarProperty Name="OpResult" ColumnName="OpResult" />
                 <ScalarProperty Name="RowId" ColumnName="RowId" />
                 <ScalarProperty Name="UserLogin" ColumnName="UserLogin" />
                 <ScalarProperty Name="IpAdress" ColumnName="IpAdress" />
                 <ScalarProperty Name="DateTime" ColumnName="DateTime" />
-                <ScalarProperty Name="IsSuccess" ColumnName="IsSuccess" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -553,11 +567,11 @@
           <EntitySetMapping Name="TransactionLog">
             <EntityTypeMapping TypeName="RogDBModel.TransactionLog">
               <MappingFragment StoreEntitySet="TransactionLog">
+                <ScalarProperty Name="UserIp" ColumnName="UserIp" />
+                <ScalarProperty Name="TimeStamp" ColumnName="TimeStamp" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
                 <ScalarProperty Name="TransType" ColumnName="TransType" />
-                <ScalarProperty Name="IpAdress" ColumnName="IpAdress" />
-                <ScalarProperty Name="TransId" ColumnName="TransId" />
-              </MappingFragment>
+                </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <FunctionImportMapping FunctionImportName="AddTransLog" FunctionName="Хранилище RogDBModel.AddTransLog" />

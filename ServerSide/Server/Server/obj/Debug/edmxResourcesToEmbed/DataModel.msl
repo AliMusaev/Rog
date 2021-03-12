@@ -31,11 +31,12 @@
     <EntitySetMapping Name="UserAuthorizationLog">
       <EntityTypeMapping TypeName="RogDBModel.UserAuthorizationLog">
         <MappingFragment StoreEntitySet="UserAuthorizationLog">
+          <ScalarProperty Name="Message" ColumnName="Message" />
+          <ScalarProperty Name="OpResult" ColumnName="OpResult" />
           <ScalarProperty Name="RowId" ColumnName="RowId" />
           <ScalarProperty Name="UserLogin" ColumnName="UserLogin" />
           <ScalarProperty Name="IpAdress" ColumnName="IpAdress" />
           <ScalarProperty Name="DateTime" ColumnName="DateTime" />
-          <ScalarProperty Name="IsSuccess" ColumnName="IsSuccess" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
@@ -72,11 +73,12 @@
     <EntitySetMapping Name="UserRegistrationLog">
       <EntityTypeMapping TypeName="RogDBModel.UserRegistrationLog">
         <MappingFragment StoreEntitySet="UserRegistrationLog">
+          <ScalarProperty Name="Message" ColumnName="Message" />
+          <ScalarProperty Name="OpResult" ColumnName="OpResult" />
           <ScalarProperty Name="RowId" ColumnName="RowId" />
           <ScalarProperty Name="UserLogin" ColumnName="UserLogin" />
           <ScalarProperty Name="IpAdress" ColumnName="IpAdress" />
           <ScalarProperty Name="DateTime" ColumnName="DateTime" />
-          <ScalarProperty Name="IsSuccess" ColumnName="IsSuccess" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
@@ -97,10 +99,10 @@
     <EntitySetMapping Name="TransactionLog">
       <EntityTypeMapping TypeName="RogDBModel.TransactionLog">
         <MappingFragment StoreEntitySet="TransactionLog">
+          <ScalarProperty Name="UserIp" ColumnName="UserIp" />
+          <ScalarProperty Name="TimeStamp" ColumnName="TimeStamp" />
           <ScalarProperty Name="Id" ColumnName="Id" />
           <ScalarProperty Name="TransType" ColumnName="TransType" />
-          <ScalarProperty Name="IpAdress" ColumnName="IpAdress" />
-          <ScalarProperty Name="TransId" ColumnName="TransId" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>

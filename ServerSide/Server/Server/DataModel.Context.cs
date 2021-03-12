@@ -36,7 +36,7 @@ namespace Server
         public virtual DbSet<sysdiagrams> sysdiagrams { get; set; }
         public virtual DbSet<TransactionLog> TransactionLog { get; set; }
     
-        public virtual int InsertToLog(Nullable<bool> inRegTable, string userLogin, string ipAdress, Nullable<bool> isSuccess)
+        public virtual int InsertToLog(Nullable<bool> inRegTable, string userLogin, string ipAdress, Nullable<byte> opResult, string message)
         {
             var inRegTableParameter = inRegTable.HasValue ?
                 new ObjectParameter("InRegTable", inRegTable) :
@@ -50,14 +50,18 @@ namespace Server
                 new ObjectParameter("IpAdress", ipAdress) :
                 new ObjectParameter("IpAdress", typeof(string));
     
-            var isSuccessParameter = isSuccess.HasValue ?
-                new ObjectParameter("IsSuccess", isSuccess) :
-                new ObjectParameter("IsSuccess", typeof(bool));
+            var opResultParameter = opResult.HasValue ?
+                new ObjectParameter("opResult", opResult) :
+                new ObjectParameter("opResult", typeof(byte));
     
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("InsertToLog", inRegTableParameter, userLoginParameter, ipAdressParameter, isSuccessParameter);
+            var messageParameter = message != null ?
+                new ObjectParameter("Message", message) :
+                new ObjectParameter("Message", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("InsertToLog", inRegTableParameter, userLoginParameter, ipAdressParameter, opResultParameter, messageParameter);
         }
     
-        public virtual int uspAddUser(string pLogin, string pPassword, string pEmail, string pIp, ObjectParameter opResult, ObjectParameter responseMessage)
+        public virtual int uspAddUser(string pLogin, string pPassword, string pEmail, string pIp, ObjectParameter opResult)
         {
             var pLoginParameter = pLogin != null ?
                 new ObjectParameter("pLogin", pLogin) :
@@ -75,7 +79,7 @@ namespace Server
                 new ObjectParameter("pIp", pIp) :
                 new ObjectParameter("pIp", typeof(string));
     
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("uspAddUser", pLoginParameter, pPasswordParameter, pEmailParameter, pIpParameter, opResult, responseMessage);
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("uspAddUser", pLoginParameter, pPasswordParameter, pEmailParameter, pIpParameter, opResult);
         }
     
         public virtual int uspLogin(string pLoginName, string pPassword, string pIp, ObjectParameter opResult, ObjectParameter id)
@@ -95,21 +99,21 @@ namespace Server
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("uspLogin", pLoginNameParameter, pPasswordParameter, pIpParameter, opResult, id);
         }
     
-        public virtual int AddTransLog(string transType, string transId, string userIp, ObjectParameter opResult)
+        public virtual int AddTransLog(string transType, string timeStamp, string userIp, ObjectParameter opResult)
         {
             var transTypeParameter = transType != null ?
                 new ObjectParameter("transType", transType) :
                 new ObjectParameter("transType", typeof(string));
     
-            var transIdParameter = transId != null ?
-                new ObjectParameter("transId", transId) :
-                new ObjectParameter("transId", typeof(string));
+            var timeStampParameter = timeStamp != null ?
+                new ObjectParameter("timeStamp", timeStamp) :
+                new ObjectParameter("timeStamp", typeof(string));
     
             var userIpParameter = userIp != null ?
                 new ObjectParameter("userIp", userIp) :
                 new ObjectParameter("userIp", typeof(string));
     
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("AddTransLog", transTypeParameter, transIdParameter, userIpParameter, opResult);
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("AddTransLog", transTypeParameter, timeStampParameter, userIpParameter, opResult);
         }
     
         public virtual int sp_alterdiagram(string diagramname, Nullable<int> owner_id, Nullable<int> version, byte[] definition)
@@ -215,7 +219,7 @@ namespace Server
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("sp_upgraddiagrams");
         }
     
-        public virtual int UpdateUserGold(Nullable<int> userId, Nullable<int> addedGold, ObjectParameter opResult)
+        public virtual int UpdateUserGold(Nullable<int> userId, Nullable<int> addedGold, ObjectParameter newValue, ObjectParameter opResult)
         {
             var userIdParameter = userId.HasValue ?
                 new ObjectParameter("userId", userId) :
@@ -225,7 +229,7 @@ namespace Server
                 new ObjectParameter("addedGold", addedGold) :
                 new ObjectParameter("addedGold", typeof(int));
     
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("UpdateUserGold", userIdParameter, addedGoldParameter, opResult);
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("UpdateUserGold", userIdParameter, addedGoldParameter, newValue, opResult);
         }
     }
 }

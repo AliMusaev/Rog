@@ -25,7 +25,7 @@ namespace CommunicationLibrary
             {
                 NetworkStream stream = OpenStream();
                 
-                string request = $"regQ|{login}+{DateTime.Now}|{login}|{password}|{email}";
+                string request = $"regQ|{DateTime.Now}|{login}|{password}|{email}";
 
                 string answer = Communicate(request, stream);
 
@@ -53,7 +53,7 @@ namespace CommunicationLibrary
             {
                 NetworkStream stream = OpenStream();
 
-                string request = $"golQ|{key}|{id}|{gold}";
+                string request = $"golQ|{DateTime.Now}|{id}|{gold}";
 
                 string answer = Communicate(request, stream);
 
@@ -81,7 +81,7 @@ namespace CommunicationLibrary
             {
                 NetworkStream stream = OpenStream();
 
-                string request = $"logQ|{login}+{DateTime.Now}|{login}|{password}";
+                string request = $"logQ|{DateTime.Now}|{login}|{password}";
 
                 string answer = Communicate(request, stream);
 

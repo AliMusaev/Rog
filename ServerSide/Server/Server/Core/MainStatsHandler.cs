@@ -10,46 +10,27 @@ namespace Server.Core
     class MainStatsHandler
     {
         private readonly int FPbyLevelUp = 25;
-        private MessageConverter converter;
         private RogDBEntities context;
         public MainStatsHandler(RogDBEntities context)
         {
             this.context = context;
-            this.converter = new MessageConverter();
         }
        
-        public string UpdatePlayerCurrency(string input, string userIp)
+        public byte UpdatePlayerCurrency(List<string> reqFields, string userIp, out string retVal)
         {
             
             var opResult = new ObjectParameter("opResult", typeof(byte));
-
-            List<string> reqFields = converter.DecompileReq(input);
-
-            bool isUniqueOp = AddNewTransaction(reqFields[0], reqFields[1], userIp);
-
-            if (isUniqueOp)
-            {
-                int id = int.Parse(reqFields[1]);
-                int gold = int.Parse(reqFields[2]);
-                context.UpdateUserGold(id, gold, opResult);
-            }
-            else
-            {
-                // Set error number 98
-                opResult.Value = 98;
-            }
-            return converter.CompileAnswer("golA", (byte)opResult.Value);
+            var newValue = new ObjectParameter("NewValue", typeof(int));
+            int id = int.Parse(reqFields[1]);
+            int gold = int.Parse(reqFields[2]);
+            context.UpdateUserGold(id, gold, newValue, opResult);
+            retVal = newValue.Value.ToString();
+            return (byte)opResult.Value;
         }
 
 
 
-        private bool AddNewTransaction(string transType, string transId, string userIp)
-        {
-            var retValue = new ObjectParameter("responseMessage", typeof(bool));
-            context.AddTransLog(transType, transId, userIp, retValue);
-            return (bool)retValue.Value;
-        }
-
+       
 
     }
 }

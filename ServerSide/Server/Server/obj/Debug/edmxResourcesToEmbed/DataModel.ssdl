@@ -27,12 +27,12 @@
   </EntityType>
   <EntityType Name="TransactionLog">
     <Key>
-      <PropertyRef Name="TransId" />
+      <PropertyRef Name="TimeStamp" />
     </Key>
     <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-    <Property Name="TransId" Type="nvarchar" MaxLength="255" Nullable="false" />
     <Property Name="TransType" Type="nvarchar" MaxLength="10" Nullable="false" />
-    <Property Name="IpAdress" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="TimeStamp" Type="nvarchar" MaxLength="30" Nullable="false" />
+    <Property Name="UserIp" Type="nvarchar" MaxLength="30" Nullable="false" />
   </EntityType>
   <EntityType Name="User">
     <Key>
@@ -49,10 +49,11 @@
       <PropertyRef Name="RowId" />
     </Key>
     <Property Name="RowId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-    <Property Name="UserLogin" Type="nvarchar" MaxLength="90" Nullable="false" />
-    <Property Name="IpAdress" Type="nvarchar" MaxLength="90" Nullable="false" />
+    <Property Name="UserLogin" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="IpAdress" Type="nvarchar" MaxLength="50" Nullable="false" />
     <Property Name="DateTime" Type="datetime" />
-    <Property Name="IsSuccess" Type="bit" Nullable="false" />
+    <Property Name="OpResult" Type="tinyint" Nullable="false" />
+    <Property Name="Message" Type="nvarchar(max)" Nullable="false" />
   </EntityType>
   <EntityType Name="UserEquip">
     <Key>
@@ -87,10 +88,11 @@
       <PropertyRef Name="RowId" />
     </Key>
     <Property Name="RowId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-    <Property Name="UserLogin" Type="nvarchar" MaxLength="90" Nullable="false" />
-    <Property Name="IpAdress" Type="nvarchar" MaxLength="90" Nullable="false" />
+    <Property Name="UserLogin" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="IpAdress" Type="nvarchar" MaxLength="50" Nullable="false" />
     <Property Name="DateTime" Type="datetime" />
-    <Property Name="IsSuccess" Type="bit" Nullable="false" />
+    <Property Name="OpResult" Type="tinyint" Nullable="false" />
+    <Property Name="Message" Type="nvarchar(max)" Nullable="false" />
   </EntityType>
   <Association Name="FK__GeneralSt__UserI__2739D489">
     <End Role="User" Type="Self.User" Multiplicity="1" />
@@ -130,7 +132,7 @@
   </Association>
   <Function Name="AddTransLog" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
     <Parameter Name="transType" Type="nvarchar" Mode="In" />
-    <Parameter Name="transId" Type="nvarchar" Mode="In" />
+    <Parameter Name="timeStamp" Type="nvarchar" Mode="In" />
     <Parameter Name="userIp" Type="nvarchar" Mode="In" />
     <Parameter Name="opResult" Type="tinyint" Mode="InOut" />
   </Function>
@@ -139,7 +141,8 @@
     <Parameter Name="InRegTable" Type="bit" Mode="In" />
     <Parameter Name="UserLogin" Type="nvarchar" Mode="In" />
     <Parameter Name="IpAdress" Type="nvarchar" Mode="In" />
-    <Parameter Name="IsSuccess" Type="bit" Mode="In" />
+    <Parameter Name="opResult" Type="tinyint" Mode="In" />
+    <Parameter Name="Message" Type="nvarchar(max)" Mode="In" />
   </Function>
   <Function Name="sp_alterdiagram" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
     <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
@@ -174,6 +177,7 @@
   <Function Name="UpdateUserGold" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
     <Parameter Name="userId" Type="int" Mode="In" />
     <Parameter Name="addedGold" Type="int" Mode="In" />
+    <Parameter Name="NewValue" Type="int" Mode="InOut" />
     <Parameter Name="opResult" Type="tinyint" Mode="InOut" />
   </Function>
   <Function Name="uspAddUser" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
@@ -182,7 +186,6 @@
     <Parameter Name="pEmail" Type="nvarchar" Mode="In" />
     <Parameter Name="pIp" Type="nvarchar" Mode="In" />
     <Parameter Name="opResult" Type="tinyint" Mode="InOut" />
-    <Parameter Name="responseMessage" Type="nvarchar(max)" Mode="InOut" />
   </Function>
   <Function Name="uspLogin" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
     <Parameter Name="pLoginName" Type="nvarchar" Mode="In" />
