@@ -8,20 +8,34 @@ namespace Server.Core
 {
     class MessageConverter
     {
-        public List<string> DecompileReq(string req)
+        public List<string> DecompileRequest(string inputString, out string reqType, out string timeStamp)
         {
-            // Parse user request and create new list
-            List<string> retVal = new List<string>(req.Split('|'));
-            // Remove request identificator
-            return retVal;
+            try
+            {
+                List<string> retVal = new List<string>(inputString.Split('|'));
+                reqType = retVal[0];
+                timeStamp = retVal[1];
+                retVal.Remove(retVal[0]);
+                retVal.Remove(retVal[1]);
+                return retVal;
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
         }
-        public string CompileAnswer(string ansId, byte opResult, string data)
+
+
+
+
+        public string CompileAnswer(string answerType, byte opResult, string outputData)
         {
-            return $"{ansId}|{opResult}|{data}";
+            return $"{answerType}|{opResult}|{outputData}";
         }
-        public string CompileAnswer(string ansId, byte opResult)
+        public string CompileAnswer(string answerType, byte opResult)
         {
-            return $"{ansId}|{opResult}";
+            return $"{answerType}|{opResult}";
         }
     }
 }

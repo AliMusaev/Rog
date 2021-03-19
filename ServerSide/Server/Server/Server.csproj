@@ -59,6 +59,11 @@
     <Compile Include="Core\MainStatsHandler.cs" />
     <Compile Include="Core\MessageConverter.cs" />
     <Compile Include="Core\Registration.cs" />
+    <Compile Include="Core\Reward\Currency.cs" />
+    <Compile Include="Core\Reward\Expirence.cs" />
+    <Compile Include="Core\Reward\Item.cs" />
+    <Compile Include="Core\Reward\Reward.cs" />
+    <Compile Include="Core\Reward\Steps.cs" />
     <Compile Include="Core\TransactionLogger.cs" />
     <Compile Include="DataModel.Context.cs">
       <AutoGen>True</AutoGen>
@@ -78,21 +83,15 @@
     <Compile Include="DataTypes\MainPlayerStats.cs" />
     <Compile Include="FormattedDbEntityValidationException.cs" />
     <Compile Include="ClientObj.cs" />
-    <Compile Include="GeneralRequestHandler.cs" />
+    <Compile Include="RequestHandler.cs" />
     <Compile Include="GeneralStats.cs">
+      <DependentUpon>DataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="GetExpData_Result.cs">
       <DependentUpon>DataModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="sp_helpdiagramdefinition_Result.cs">
-      <DependentUpon>DataModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="sp_helpdiagrams_Result.cs">
-      <DependentUpon>DataModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="sysdiagrams.cs">
-      <DependentUpon>DataModel.tt</DependentUpon>
-    </Compile>
     <Compile Include="TransactionLog.cs">
       <DependentUpon>DataModel.tt</DependentUpon>
     </Compile>

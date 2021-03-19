@@ -14,11 +14,8 @@ namespace Server
     
     public partial class TransactionLog
     {
-        public string TransId { get; set; }
-        public string IpAdress { get; set; }
-        public string TransType { get; set; }
         public int Id { get; set; }
-        public string Message { get; set; }
+        public string TransType { get; set; }
         public string TimeStamp { get; set; }
         public string UserIp { get; set; }
     }

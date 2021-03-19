@@ -21,7 +21,7 @@ namespace Server
             {
                 try
                 {
-                    GeneralRequestHandler dB = new GeneralRequestHandler();
+                    RequestHandler dB = new RequestHandler();
                     listener = new TcpListener(ip, port);
                     listener.Start();
                     Console.WriteLine("Ожидание подключений...");

@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Server.Core;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Net.Sockets;
@@ -10,8 +11,9 @@ namespace Server
     public class ClientObj
     {
         private TcpClient client;
-        private GeneralRequestHandler dB;
-        public ClientObj(TcpClient tcpClient, GeneralRequestHandler dB)
+        private RequestHandler dB;
+        private MessageConverter messageReciver;
+        public ClientObj(TcpClient tcpClient, RequestHandler dB)
         {
             client = tcpClient;
             this.dB = dB;
@@ -30,7 +32,7 @@ namespace Server
                 int bytes = stream.Read(data, 0, data.Length);
                 builder.Append(Encoding.Unicode.GetString(data, 0, bytes));
                 // Запрос в БД
-                string answer = dB.HanldeRequest(builder.ToString(), MYIpClient);
+                string answer = dB.Procces(builder.ToString(), MYIpClient);
                 // отправляем обратно сообщение
                 data = Encoding.Unicode.GetBytes(answer);
 

@@ -16,6 +16,15 @@
     <Property Name="Gold" Type="Int32" />
     <NavigationProperty Name="User" Relationship="Self.FK__GeneralSt__UserI__2739D489" FromRole="GeneralStats" ToRole="User" />
   </EntityType>
+  <EntityType Name="TransactionLog">
+    <Key>
+      <PropertyRef Name="TimeStamp" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="TransType" Type="String" MaxLength="10" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="TimeStamp" Type="String" MaxLength="30" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="UserIp" Type="String" MaxLength="30" FixedLength="false" Unicode="true" Nullable="false" />
+  </EntityType>
   <EntityType Name="User">
     <Key>
       <PropertyRef Name="UserID" />
@@ -37,9 +46,8 @@
     <Property Name="UserLogin" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
     <Property Name="IpAdress" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
     <Property Name="DateTime" Type="DateTime" Precision="3" />
-    <Property Name="IsSuccess" Type="Boolean" Nullable="false" />
     <Property Name="OpResult" Type="Byte" Nullable="false" />
-    <Property Name="Message" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="Message" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
   </EntityType>
   <EntityType Name="UserEquip">
     <Key>
@@ -79,9 +87,8 @@
     <Property Name="UserLogin" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
     <Property Name="IpAdress" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
     <Property Name="DateTime" Type="DateTime" Precision="3" />
-    <Property Name="IsSuccess" Type="Boolean" Nullable="false" />
     <Property Name="OpResult" Type="Byte" Nullable="false" />
-    <Property Name="Message" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="Message" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
   </EntityType>
   <Association Name="FK__GeneralSt__UserI__2739D489">
     <End Role="User" Type="Self.User" Multiplicity="1" />
@@ -121,6 +128,7 @@
   </Association>
   <EntityContainer Name="RogDBEntities" annotation:LazyLoadingEnabled="true">
     <EntitySet Name="GeneralStats" EntityType="Self.GeneralStats" />
+    <EntitySet Name="TransactionLog" EntityType="Self.TransactionLog" />
     <EntitySet Name="User" EntityType="Self.User" />
     <EntitySet Name="UserAuthorizationLog" EntityType="Self.UserAuthorizationLog" />
     <EntitySet Name="UserEquip" EntityType="Self.UserEquip" />
@@ -138,34 +146,21 @@
       <End Role="User" EntitySet="User" />
       <End Role="UserInventory" EntitySet="UserInventory" />
     </AssociationSet>
+    <FunctionImport Name="AddTransLog">
+      <Parameter Name="transType" Mode="In" Type="String" />
+      <Parameter Name="timeStamp" Mode="In" Type="String" />
+      <Parameter Name="userIp" Mode="In" Type="String" />
+      <Parameter Name="opResult" Mode="InOut" Type="Byte" />
+    </FunctionImport>
+    <FunctionImport Name="GetExpData" ReturnType="Collection(RogDBModel.GetExpData_Result)">
+      <Parameter Name="userId" Mode="In" Type="Int32" />
+    </FunctionImport>
     <FunctionImport Name="InsertToLog">
       <Parameter Name="InRegTable" Mode="In" Type="Boolean" />
       <Parameter Name="UserLogin" Mode="In" Type="String" />
       <Parameter Name="IpAdress" Mode="In" Type="String" />
       <Parameter Name="opResult" Mode="In" Type="Byte" />
       <Parameter Name="Message" Mode="In" Type="String" />
-    </FunctionImport>
-    <FunctionImport Name="uspAddUser">
-      <Parameter Name="pLogin" Mode="In" Type="String" />
-      <Parameter Name="pPassword" Mode="In" Type="String" />
-      <Parameter Name="pEmail" Mode="In" Type="String" />
-      <Parameter Name="pIp" Mode="In" Type="String" />
-      <Parameter Name="opResult" Mode="InOut" Type="Byte" />
-    </FunctionImport>
-    <FunctionImport Name="uspLogin">
-      <Parameter Name="pLoginName" Mode="In" Type="String" />
-      <Parameter Name="pPassword" Mode="In" Type="String" />
-      <Parameter Name="pIp" Mode="In" Type="String" />
-      <Parameter Name="opResult" Mode="InOut" Type="Byte" />
-      <Parameter Name="Id" Mode="InOut" Type="Int32" />
-    </FunctionImport>
-    <EntitySet Name="sysdiagrams" EntityType="RogDBModel.sysdiagrams" />
-    <EntitySet Name="TransactionLog" EntityType="RogDBModel.TransactionLog" />
-    <FunctionImport Name="AddTransLog">
-      <Parameter Name="transType" Mode="In" Type="String" />
-      <Parameter Name="timeStamp" Mode="In" Type="String" />
-      <Parameter Name="userIp" Mode="In" Type="String" />
-      <Parameter Name="opResult" Mode="InOut" Type="Byte" />
     </FunctionImport>
     <FunctionImport Name="sp_alterdiagram">
       <Parameter Name="diagramname" Mode="In" Type="String" />
@@ -183,11 +178,11 @@
       <Parameter Name="diagramname" Mode="In" Type="String" />
       <Parameter Name="owner_id" Mode="In" Type="Int32" />
     </FunctionImport>
-    <FunctionImport Name="sp_helpdiagramdefinition" ReturnType="Collection(RogDBModel.sp_helpdiagramdefinition_Result)">
+    <FunctionImport Name="sp_helpdiagramdefinition">
       <Parameter Name="diagramname" Mode="In" Type="String" />
       <Parameter Name="owner_id" Mode="In" Type="Int32" />
     </FunctionImport>
-    <FunctionImport Name="sp_helpdiagrams" ReturnType="Collection(RogDBModel.sp_helpdiagrams_Result)">
+    <FunctionImport Name="sp_helpdiagrams">
       <Parameter Name="diagramname" Mode="In" Type="String" />
       <Parameter Name="owner_id" Mode="In" Type="Int32" />
     </FunctionImport>
@@ -203,39 +198,33 @@
       <Parameter Name="NewValue" Mode="InOut" Type="Int32" />
       <Parameter Name="opResult" Mode="InOut" Type="Byte" />
     </FunctionImport>
+    <FunctionImport Name="uspAddUser">
+      <Parameter Name="pLogin" Mode="In" Type="String" />
+      <Parameter Name="pPassword" Mode="In" Type="String" />
+      <Parameter Name="pEmail" Mode="In" Type="String" />
+      <Parameter Name="pIp" Mode="In" Type="String" />
+      <Parameter Name="opResult" Mode="InOut" Type="Byte" />
+    </FunctionImport>
+    <FunctionImport Name="uspLogin">
+      <Parameter Name="pLoginName" Mode="In" Type="String" />
+      <Parameter Name="pPassword" Mode="In" Type="String" />
+      <Parameter Name="pIp" Mode="In" Type="String" />
+      <Parameter Name="opResult" Mode="InOut" Type="Byte" />
+      <Parameter Name="Id" Mode="InOut" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="UpdateUserExp">
+      <Parameter Name="userId" Mode="In" Type="Int32" />
+      <Parameter Name="currentExp" Mode="In" Type="Int32" />
+      <Parameter Name="reqExp" Mode="In" Type="Int32" />
+      <Parameter Name="lvl" Mode="In" Type="Int32" />
+      <Parameter Name="freePoints" Mode="In" Type="Int32" />
+      <Parameter Name="opResult" Mode="InOut" Type="Byte" />
+    </FunctionImport>
   </EntityContainer>
-  <EntityType Name="sysdiagrams">
-    <Key>
-      <PropertyRef Name="diagram_id" />
-    </Key>
-    <Property Name="name" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
-    <Property Name="principal_id" Type="Int32" Nullable="false" />
-    <Property Name="diagram_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-    <Property Name="version" Type="Int32" />
-    <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
-  </EntityType>
-  <EntityType Name="TransactionLog">
-    <Key>
-      <PropertyRef Name="TransId" />
-      <PropertyRef Name="TimeStamp" />
-    </Key>
-    <Property Name="TransId" Type="String" Nullable="false" MaxLength="255" FixedLength="false" Unicode="true" />
-    <Property Name="IpAdress" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
-    <Property Name="TransType" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="true" />
-    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-    <Property Name="Message" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-    <Property Name="TimeStamp" Type="String" Nullable="false" MaxLength="30" FixedLength="false" Unicode="true" />
-    <Property Name="UserIp" Type="String" Nullable="false" MaxLength="30" FixedLength="false" Unicode="true" />
-  </EntityType>
-  <ComplexType Name="sp_helpdiagramdefinition_Result">
-    <Property Type="Int32" Name="version" Nullable="true" />
-    <Property Type="Binary" Name="definition" Nullable="true" />
-  </ComplexType>
-  <ComplexType Name="sp_helpdiagrams_Result">
-    <Property Type="String" Name="Database" Nullable="true" MaxLength="128" />
-    <Property Type="String" Name="Name" Nullable="false" MaxLength="128" />
-    <Property Type="Int32" Name="ID" Nullable="false" />
-    <Property Type="String" Name="Owner" Nullable="true" MaxLength="128" />
-    <Property Type="Int32" Name="OwnerID" Nullable="false" />
+  <ComplexType Name="GetExpData_Result">
+    <Property Type="Int32" Name="Exp" Nullable="true" />
+    <Property Type="Int32" Name="ReqExp" Nullable="true" />
+    <Property Type="Int32" Name="Lvl" Nullable="true" />
+    <Property Type="Int32" Name="Fp" Nullable="true" />
   </ComplexType>
 </Schema>

@@ -15,16 +15,6 @@
     <Property Name="Fp" Type="int" />
     <Property Name="Gold" Type="int" />
   </EntityType>
-  <EntityType Name="sysdiagrams">
-    <Key>
-      <PropertyRef Name="diagram_id" />
-    </Key>
-    <Property Name="name" Type="nvarchar" MaxLength="128" Nullable="false" />
-    <Property Name="principal_id" Type="int" Nullable="false" />
-    <Property Name="diagram_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-    <Property Name="version" Type="int" />
-    <Property Name="definition" Type="varbinary(max)" />
-  </EntityType>
   <EntityType Name="TransactionLog">
     <Key>
       <PropertyRef Name="TimeStamp" />
@@ -174,6 +164,14 @@
     <Parameter Name="new_diagramname" Type="nvarchar" Mode="In" />
   </Function>
   <Function Name="sp_upgraddiagrams" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+  <Function Name="UpdateUserExp" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="userId" Type="int" Mode="In" />
+    <Parameter Name="currentExp" Type="int" Mode="In" />
+    <Parameter Name="reqExp" Type="int" Mode="In" />
+    <Parameter Name="lvl" Type="int" Mode="In" />
+    <Parameter Name="freePoints" Type="int" Mode="In" />
+    <Parameter Name="opResult" Type="tinyint" Mode="InOut" />
+  </Function>
   <Function Name="UpdateUserGold" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
     <Parameter Name="userId" Type="int" Mode="In" />
     <Parameter Name="addedGold" Type="int" Mode="In" />
@@ -196,7 +194,6 @@
   </Function>
   <EntityContainer Name="Хранилище RogDBModelContainer">
     <EntitySet Name="GeneralStats" EntityType="Self.GeneralStats" Schema="dbo" store:Type="Tables" />
-    <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="TransactionLog" EntityType="Self.TransactionLog" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="User" EntityType="Self.User" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="UserAuthorizationLog" EntityType="Self.UserAuthorizationLog" Schema="dbo" store:Type="Tables" />
